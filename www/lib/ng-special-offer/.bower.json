@@ -1,0 +1,35 @@
+{
+  "name": "ng-special-offer",
+  "version": "1.0.0",
+  "homepage": "https://github.com/AlexDisler/ng-special-offer",
+  "authors": [
+    "Alex Disler"
+  ],
+  "main": "src/ng-special-offer.js",
+  "keywords": [
+    "cordova",
+    "ionic",
+    "apprate"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ngstorage": "~0.3.0"
+  },
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.0",
+    "commit": "332f2d8ec64ec30a2907af4c2231562034523b47"
+  },
+  "_source": "git://github.com/AlexDisler/ng-special-offer.git",
+  "_target": "~1.0.0",
+  "_originalSource": "ng-special-offer",
+  "_direct": true
+}

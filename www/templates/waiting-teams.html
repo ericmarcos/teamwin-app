@@ -1,0 +1,19 @@
+<ion-list>
+  <h2 class="waiting-title" ng-if="!waiting_teams.length">No tienes solicitudes pendientes.</h2>
+  <ion-item class="item-remove-animate item-avatar item-avatar-waiting item-icon-right" collection-repeat="team in waiting_teams" type="item-text-wrap" ui-sref="tab.team-detail.current({teamId: team.id})">
+    <team-avatar class="team-item-avatar" team="team"></team-avatar>
+    <h2>{{team.name}}</h2>
+    <p class="pending" ng-if="team.state=='state_waiting_player'"><!--<img ng-src="{{team.captain.pic}}">-->El capitán <span class="username">{{get_name(team.captain)}}</span> quiere ficharte</p>
+    <p class="pending" ng-if="team.state=='state_waiting_captain'"><!--<img ng-src="{{team.captain.pic}}">-->Has solicitado entrar en el equipo</p>
+    <i class="icon ion-chevron-right icon-accessory"></i>
+    <div class="buttons">
+        <div ng-if="team.state=='state_waiting_captain'">
+          <a class="button cancel-btn" ng-click="leave(team)" stop-event="click">CANCELAR</a>
+        </div>
+        <div ng-if="team.state=='state_waiting_player'">
+          <a class="button reject-btn" ng-click="dismiss(team)" stop-event="click">RECHAZAR</a>
+          <a class="button accept-btn" ng-click="enroll(team)" stop-event="click">ACEPTAR</a>
+        </div>
+      </div>
+  </ion-item>
+</ion-list>

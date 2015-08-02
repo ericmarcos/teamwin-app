@@ -1,0 +1,22 @@
+
+/***** FONTS *****/
+@import "source-sans";
+//@import "asap";
+
+@font-face {
+    font-family: 'Asap';
+    src: url('../fonts/Asap/Asap-Regular.ttf');
+    src: url('../fonts/Asap/Asap-Regular.ttf') format('truetype');
+    font-weight: 200;
+}
+@font-face {
+    font-family: 'AsapBold';
+    src: url('../fonts/Asap/Asap-Bold.ttf');
+    src: url('../fonts/Asap/Asap-Bold.ttf') format('truetype');
+    font-weight: 400;
+}
+
+$font-family-base: 'Asap', 'Source Sans Pro', Tahoma, sans-serif;
+$headings-font-family:            $font-family-base !default;
+$headings-font-weight:            400 !default;
+

@@ -1,0 +1,19 @@
+<ion-view view-title="Unirme a equipo" hide-nav-bar="true">
+  <ion-content class="join">
+    <h1>¡A por ellos, {{get_name(me)}}!</h1>
+    <div class="join-top">
+        <div class="bg-top" style="border-left-width:{{width}}px; border-bottom-width:{{width*0.25}}px"></div>
+        <img ng-src="{{me.pic}}" class="welcome-pic">
+    </div>
+    <h3>¡Parece que ya tienes amigos en Teamwin!</h3>
+    <h4>Te recomendamos que te unas a alguno de sus equipos y así tener más opciones de ganar el premio.<br><a>¡La unión hace la fuerza!</a></h4>
+    <ion-list>
+      <ion-item class="join-team-item" ng-repeat="team in available_teams" type="item-text-wrap" ng-click="check_team(team)">
+        <img class="team-pic" ng-src="{{team.pic}}">
+        <h2>{{team.name}}</h2>
+        <img class="player-pic" ng-repeat="p in team.players | limitTo:3" ng-src="{{p.pic}}">
+      </ion-item>
+    </ion-list>
+    <p>Si lo prefieres, puedes <a ui-sref="on-board-new-team">crear tu propio equipo</a>.</p>
+  </ion-content>
+</ion-view>

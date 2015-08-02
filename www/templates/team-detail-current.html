@@ -1,0 +1,33 @@
+<ion-list>
+  <div ng-if="team.players_waiting_captain.length" class="item item-divider">
+    Solicitudes pendientes
+  </div>
+  <ion-item class="item-complex item-remove-animate item-avatar team-detail-item" ng-repeat="player in team.players_waiting_captain" type="item-text-wrap">
+  <div class="item-content">
+    <img ng-src="{{player.pic}}" class="team-player-pic">
+    <h2>{{get_name(player)}}</h2>
+    <h3>Quiere entrar en el equipo<span ng-if="team.captain.id != me.id"><br>(esperando aprobación del capitán)</span></h3>
+    <div class="button-bar" ng-if="team.captain.id == me.id">
+      <a class="button accept-sign-btn" ng-click="sign(player)">ACEPTAR FICHAJE</a><br>
+    </div>
+    <div class="button-bar" ng-if="team.captain.id == me.id">
+      <a class="button refuse-sign-btn" ng-click="fire(player)">DESESTIMAR</a>
+    </div>
+  </div>
+  </ion-item>
+
+  <div class="item item-divider">
+    <h4>Puntos<span class="pool-hit"></span><span class="pool-shared"></span></h4>
+  </div>
+  <ion-item class="item-remove-animate item-avatar item-icon-right team-detail-item" ng-repeat="player in leaderboard" type="item-text-wrap">
+    <img ng-src="{{player.pic}}" class="team-player-pic">
+    <div class="team-player-name"><h2>{{get_name(player)}}</h2></div>
+    <span class="played-icon">
+      {{player.points}}<span class="pool-shared"></span><span class="pool-hit"></span>
+    </span>
+    <!--<span class="progress-pools" style="width:{{completedPools(player)}}%" ng-class="{'pending-pools': hasPendingPools(player)}"></span>-->
+    <ion-option-button ng-if="canFire(team, player)" class="button-assertive" ng-click="fire(player, true)">
+      Expulsar
+    </ion-option-button>
+  </ion-item>
+</ion-list>

@@ -1,0 +1,24 @@
+<div ng-show="state=='init'">
+    <h1>{{team.name}}</h1>
+    <div class="team-member" ng-repeat="p in team.players">
+        <img ng-src="{{p.pic}}">
+        <div class="first_name">{{get_name(p)}}</div>
+        <div class="captain" ng-if="p.id == team.captain.id">Capitán</div>
+    </div>
+    <button class="join-this-team button button-positive" ng-click="join(team)">
+    FICHA POR ESTE EQUIPO
+    </button>
+    <button class="cancel-join button button-positive" ng-click="cancel()">
+    CANCELAR
+    </button>
+</div>
+<div ng-show="state == 'loading'" class="loading">
+    <h2 ng-if="loading_msg">{{loading_msg}}</h2>
+    <ion-spinner icon="crescent"></ion-spinner>
+</div>
+<div ng-show="state == 'finish'">
+    <h1>¡Has fichado por<br>{{team.name}}!</h1>
+    <button class="start-playing button" ng-click="play()">
+    EMPIEZA A JUGAR
+    </button>
+</div>

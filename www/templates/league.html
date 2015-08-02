@@ -1,0 +1,31 @@
+<ion-view view-title="{{league.name}}">
+  <ion-content>
+    <ion-refresher
+      pulling-text="Actualizar..."
+      on-refresh="getLeagues()">
+    </ion-refresher>
+    <div class="prize-header">
+      <img ng-src="{{getPrizePic()}}">
+      <h4>PREMIO SEMANAL</h4>
+      <h3>{{getPrizeName()}}</h3>
+      <div ng-show="!show_desc" class="price-description-btn"  ng-click="showDesc()">
+        <i class="icon ion-chevron-down"></i>
+      </div>
+      <div ng-show="show_desc" class="price-description-btn"  ng-click="hideDesc()">
+        <i class="icon ion-chevron-up"></i>
+      </div>
+      <div ng-if="show_desc" class="prize-desc">
+        <div class="ng-cloak" ng-bind-html="prizeDesc()"></div>
+      </div>
+    </div>
+    <div class="tabs teams-tabs">
+      <a class="tab-item" ng-if="canPrev()" ng-class="{'active':isPrevActive()}" ui-sref="tab.league.prev">
+        Jornada Anterior
+      </a>
+      <a class="tab-item" ng-if="canCurrent()" ng-class="{'active':isCurrentActive()}" ui-sref="tab.league.current">
+        Jornada Actual
+      </a>
+    </div>
+    <ui-view name="leaderboards"></ui-view>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,164 @@
+<ion-view view-title="{{title}}">
+  <ion-header-bar>
+    <h1 class="title">{{title}}</h1>
+    <div class="buttons">
+      <button class="button">relaod</button>
+    </div>
+  </ion-header-bar>
+  <ion-content scroll="false" class="play-bg">
+
+    <div scroll="false" ng-if="!explanation_seen" class="explanation">
+      <h2>Para pronosticar un resultado<br>desliza el dedo por la pantalla</h2>
+      <img ng-src="img/play-instructions.jpg">
+      <button class="accept-expl-btn button" ng-click="accept_explanation()">
+      ENTIENDO, ¡EMPECEMOS!
+      </button>
+    </div>
+
+    <div ng-if="explanation_seen && loading_pools" class="loading-pools">
+      <ion-spinner icon="ripple" class="pool-loader"></ion-spinner>
+      <h4>Cargando partidos...</h4>
+    </div>
+
+    <!--<div ng-if="explanation_seen && !loading_pools">
+      <button class="reload-btn" ng-click="getPools()"><i class="icon ion-android-sync"></i></button>
+    </div>-->
+    <div ng-if="pools.length && explanation_seen && !loading_pools" class="play-screen">
+      <td-cards ng-if="swipe_pools.length" style="height: {{width}}px;">
+        <td-card ng-repeat="pool in swipe_pools" on-destroy="cardDestroyed($index)" on-transition-left="cardSwipedLeft($index)" on-transition-right="cardSwipedRight($index)" on-transition-up="cardSwipedUp($index)" on-transition-down="cardSwipedDown($index)" on-partial-swipe="cardPartialSwipe(amt)">
+          <div class="card-bg" ng-style="card_style">
+            <div class="image">
+              <div class="middle">
+                <div class="team">
+                    <img ng-src="{{pool.options[0].pic}}">
+                    <h3>{{pool.options[0].short_name}}</h3>
+                </div>
+                <div class="vs">
+                  <h3>VS</h3>
+                </div>
+                <div class="team">
+                    <img ng-src="{{pool.options[1].pic}}">
+                    <h3>{{pool.options[1].short_name}}</h3>
+                </div>
+              </div>
+              <div class="yes-text option-text" style="background-color: {{pool.options[1].color}}"><div class="swipe-text">Gana<br>{{pool.options[1].name}}<br><img width="100" ng-src="{{pool.options[1].pic}}"></div></div>
+              <div class="no-text option-text" style="background-color: {{pool.options[0].color}}"><div class="swipe-text">Gana<br>{{pool.options[0].name}}<br><img width="100" ng-src="{{pool.options[0].pic}}"></div></div>
+              <div class="up-text option-text"><div class="swipe-text">Empatan<br><img width="100" ng-src="{{pool.options[0].pic}}"><img width="100" ng-src="{{pool.options[1].pic}}"></div></div>
+              <div class="down-text option-text"><div class="swipe-text">Déjalo para<br>más tarde<br><img width="100" ng-src="img/question.png"></div></div>
+            </div>
+          </div>
+        </td-card>
+      </td-cards>
+
+      <div class="summary" ng-if="!swipe_pools.length && !loading_pools">
+        <h2>Resumen de tus pronósticos</h2>
+        <ion-scroll class="pool-list" ng-class="{'pool-list-tall': did_extra_points || just_did_extra_points}">
+          <ion-refresher
+            pulling-text=""
+            on-refresh="getPools()">
+          </ion-refresher>
+          <div class="pool" ng-repeat="p in pools" ng-class="{'fail':isFail(p)}">
+            <div class="left"><img ng-src="{{p.options[0].pic}}"><div class="team-name">{{p.options[0].short_name}}</div></div>
+            <div class="middle" ng-class="{'win':isWin(p)}">{{p.user_result || ""}}</div>
+            <div class="right"><img ng-src="{{p.options[1].pic}}"><div class="team-name">{{p.options[1].short_name}}</div></div>
+          </div>
+          <div class="pool">
+            <div class="left"><div class="team-name">Aciertos</div></div>
+            <div class="middle">{{nWins()}}</div>
+          </div>
+          <div class="pool">
+            <div class="left"><div class="team-name">Extra</div></div>
+            <div class="middle" ng-show="did_extra_points || just_did_extra_points">+2</div>
+            <div class="middle" ng-hide="did_extra_points || just_did_extra_points">0</div>
+          </div>
+          <div class="pool">
+            <div class="left"><div class="team-name">Puntos</div></div>
+            <div class="middle win" ng-show="did_extra_points || just_did_extra_points">{{nWins()+2}}</div>
+            <div class="middle win" ng-hide="did_extra_points || just_did_extra_points">{{nWins()}}</div>
+          </div>
+        </ion-scroll>
+        <div ng-if="!did_extra_points && !just_did_extra_points" class="share">
+          <button class="extra-points-btn button" ng-click="extraPoints()">
+            CONSIGUE 2 PUNTOS EXTRA
+          </button>
+        </div>
+      </div>
+    </div>
+    <div ng-show="show_share" class="hide-share-img">
+      <div class="canvas">
+        <div class="pool" ng-repeat="p in pools" ng-class="{'fail':isFail(p)}">
+          <div class="left"><img crossorigin="anonymous" ng-src="{{get_CORS_pic(p.options[0].pic)}}"><div class="team-name">{{p.options[0].short_name}}</div></div>
+          <div class="middle" ng-class="{'win':isWin(p)}">{{p.user_result || "-"}}</div>
+          <div class="right"><img crossorigin="anonymous" ng-src="{{get_CORS_pic(p.options[1].pic)}}"><div class="team-name">{{p.options[1].short_name}}</div></div>
+        </div>
+      </div>
+    </div>
+
+      <!--<ion-slide-box auto-play="false" on-slide-changed="slideHasChanged($index)">
+        <ion-slide ng-repeat="pool in pools">
+      
+          <div class="pool-slide">
+            <div class="top">
+              <h1>{{pool.league}}</h1>
+              <h2>{{pool.fixture}}</h2>
+            </div>
+            <div class="middle">
+              <div class="team">
+                  <img ng-src="{{pool.options[0].pic}}">
+                  <h3>{{pool.options[0].name}}</h3>
+              </div>
+              <div class="vs">
+                <h3>VS</h3>
+              </div>
+              <div class="team">
+                  <img ng-src="{{pool.options[1].pic}}">
+                  <h3>{{pool.options[1].name}}</h3>
+              </div>
+            </div>
+            <div class="bottom" ng-class="{'result1': pool.user_result==1, 'resultX': pool.user_result=='X', 'result2': pool.user_result==2}" ng-if="pool.user_result">
+              <div class="row" style="height:{{width/3}}px">
+                <div class="col">
+                  <div class="result" ng-class="{'animated rubberBand': result_vibrate}" on-touch="resultTouch()">
+                    <div class="number">{{pool.user_result}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bottom" ng-if="!pool.user_result">
+              <div class="row" style="height:{{width/3}}px">
+                <div class="col">
+                  <play-btn caption="'1'"></play-btn>
+                </div>
+                <div class="col">
+                  <play-btn caption="'X'"></play-btn>
+                </div>
+                <div class="col">
+                  <play-btn caption="'2'"></play-btn>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-slide>
+        <ion-slide class="summary">
+          <h2>{{pools[0].league}} - {{pools[0].fixture}}</h2>
+          <ion-scroll class="pool-list">
+            <div class="pool" ng-repeat="p in pools">
+              <div class="left"><img ng-src="{{p.options[0].pic}}"><div class="team-name">{{p.options[0].name}}</div></div>
+              <div class="middle">{{p.user_result || "-"}}</div>
+              <div class="right"><img ng-src="{{p.options[1].pic}}"><div class="team-name">{{p.options[1].name}}</div></div>
+            </div>
+          </ion-scroll>
+          <div class="share">
+            <button class="extra-points-btn button">
+              CONSIGUE 2 PUNTOS EXTRA
+            </button>
+          </div>
+        </ion-slide>
+      </ion-slide-box>
+
+      
+    <div ng-if="!pools.length">
+      <h1>¡Genial! Ya has jugado a todas las porras de esta jornada.</h1>
+    </div>-->
+  </ion-content>
+</ion-view>

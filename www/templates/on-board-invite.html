@@ -1,0 +1,28 @@
+<ion-view view-title="Mercado de fichajes" hide-nav-bar="true">
+  <ion-pane class="invite">
+    <h1>Equipo {{team.name}}</h1>
+    <div class="invite-top">
+        <div class="bg-top" style="border-right-width:{{width}}px; border-bottom-width:{{width*0.25}}px"></div>
+        <img ng-src="{{team.pic}}" class="welcome-pic">
+    </div>
+
+    <div class="captain-top">
+      <img ng-src="{{team.captain.pic}}">
+      <p><span class="captain">Capitán</span> {{get_name(team.captain)}}</p>
+    </div>
+    <h2>Cuantos más jugadores más puntos podrás ganar, ficha a tus amigos y recuerda, ¡la unión hace la fuerza!</h2>
+    <h4>Ficha a través de</h4>
+    <!--<button class="fb-btn button" ng-click="shareViaFacebook()">
+      FACEBOOK
+    </button>-->
+    <button class="wa-btn button" ng-click="shareViaWhatsapp()">
+      WHATSAPP
+    </button>
+  
+    <div class="sign-buttons">
+      <button class="start-btn button" ui-sref="tab.play">
+        EMPIEZA A JUGAR
+      </button>
+    </div>
+  </ion-pane>
+</ion-view>

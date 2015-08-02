@@ -1,0 +1,27 @@
+<ion-view view-title="Ganador" hide-nav-bar="true">
+  <ion-pane class="winner-screen">
+    <div class="winner-top">
+        <div class="bg-top" style="border-left-width:{{width}}px; border-bottom-width:{{width*0.25}}px"></div>
+        <img ng-src="img/enhorabuena.png">
+    </div>
+
+    <div class="prize-card">
+      <img ng-src="img/prize.png" class="prize">
+      <img ng-src="{{me.pic}}" class="avatar">
+      <img ng-src="img/winner.png" class="winner">
+    </div>
+    
+    <h2>Eres el mejor de los mejores, por eso <strong>¡Este premio es tuyo!</strong></h2>
+    <p>En las próximas 24h recibirás un e-mail con tu código amazon por valor de 50€, disfrútalo. Si no recibes ningun e-mail escríbenos a premios@teamwinapp.com</p>
+  
+    <div class="share-buttons">
+      <!--<h3>Comparte tu éxito en Facebook<br><strong>¡que sepan quién manda!</strong></h3>-->
+      <button class="fb-btn button" ng-click="share()">
+        ¡COMPÁRTELO!
+      </button>
+      <button class="continue-btn button" ui-sref="tab.league">
+        ACEPTAR
+      </button>
+    </div>
+  </ion-pane>
+</ion-view>

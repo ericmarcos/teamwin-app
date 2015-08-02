@@ -1,0 +1,43 @@
+<ion-view view-title="Login" hide-nav-bar="true">
+  <ion-pane class="login-screen" style="background-color:{{bg_color}}">
+    <div class="login-top">
+        <!--<div class="bg-top" style="border-left-width:{{width}}px; border-bottom-width:{{width*0.25}}px"></div>-->
+        <img ng-src="img/teamwin_logo_white_transp.png" class="logo">
+    </div>
+    <div class="login-middle">
+        <ion-slide-box auto-play="true" slide-interval="8000" on-slide-changed="slideHasChanged($index)">
+          <ion-slide>
+            <div class="login-slide">
+                <img ng-src="img/intro_1.png" width="121">
+                <h2 class="login-info">Teamwin es un juego en equipo donde pronosticas resultados deportivos.</h2>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="login-slide">
+                <img ng-src="img/intro_2.png" width="175">
+                <h2 class="login-info">Crea un equipo y ficha a tus amigos para sumar puntos entre todos.</h2>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="login-slide">
+                <img ng-src="img/intro_3.png" width="97">
+                <h2 class="login-info">Cada pronóstico acertado te suma un punto. La puntuación del equipo es la suma de las puntuaciones de sus miembros.</h2>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="login-slide">
+                <img ng-src="img/intro_4.png" width="37">
+                <h2 class="login-info">Cada jornada el mejor jugador del mejor equipo se lleva 50€.<br>¿Todo claro?<br>Entonces, ¡que empiece el juego!</h2>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+    </div>
+    <div class="login-bottom">
+        <div class="bg-bottom" style="border-right-width:{{width}}px; border-top-width:{{width*0.25}}px"></div>
+        <div class="connect-with">Conecta con</div>
+        <button class="button login-btn" ng-click="facebookLogin()">
+          FACEBOOK
+        </button>
+    </div>
+  </ion-pane>
+</ion-view>

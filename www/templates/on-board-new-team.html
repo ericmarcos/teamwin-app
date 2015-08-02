@@ -1,0 +1,22 @@
+<ion-view view-title="Nuevo equipo" hide-nav-bar="true">
+  <ion-pane class="join-new-team">
+    <h1>¡A por ellos, {{get_name(me)}}!</h1>
+    <div class="join-top">
+        <div class="bg-top" style="border-left-width:{{width}}px; border-bottom-width:{{width*0.25}}px"></div>
+        <img ng-src="{{me.pic}}" class="welcome-pic">
+    </div>
+    <ion-scroll>
+        <h3>
+          Crea un equipo para empezar a jugar
+        </h3>
+        <h5>Avatar del equipo</h5>
+        <browse-file></browse-file>
+        <h5>Nombre del equipo</h5>
+        <input type="text" ng-model="team.name" placeholder="Toca aquí para escribir">
+    </ion-scroll>
+    
+    <button class="create-team button" ng-click="create()">
+    LISTO
+    </button>
+  </ion-pane>
+</ion-view>

@@ -1,0 +1,10 @@
+<div class="loading" ng-show="state == 'loading'">
+    <h2 ng-if="loading_msg">{{loading_msg}}</h2>
+    <ion-spinner icon="crescent"></ion-spinner>
+</div>
+<div ng-show="state == 'push'">
+    <h4>Activa las notificaciones para enterarte de las novedades sobre tu equipo y nuevos premios.</h4>
+    <button class="ok-btn button" ng-click="continue()">
+    OK
+    </button>
+</div>

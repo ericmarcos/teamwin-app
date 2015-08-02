@@ -1,0 +1,56 @@
+<div class="loading" ng-show="extra.state == 'loading'">
+    <h4 ng-show="extra.loading_msg">{{extra.loading_msg}}</h4>
+    <ion-spinner icon="crescent"></ion-spinner>
+</div>
+<div ng-show="extra.state == 'initial'">
+    <h4>Elige una de las siguientes opciones y consigue 2 puntos extra para esta jornada:</h4>
+    <button class="action-btn button" ng-click="share()">
+    COMPARTE RESUMEN
+    </button>
+    <button class="action-btn button" ng-click="extra.state = 'rate'">
+    VALORA TEAMWIN
+    </button>
+    <button class="action-btn button" ng-click="extra.state = 'feedback'">
+    ENVIA FEEDBACK
+    </button>
+    <button class="cancel-btn button" ng-click="cancel()">
+    CANCELAR
+    </button>
+</div>
+<div ng-show="extra.state == 'rate'">
+    <h4>Tu valoración es esencial para Teamwin ¿nos ayudas?</h4>
+    <rating ng-model="extra.rate" max="5"></rating>
+    <button class="action-btn button" ng-click="doRate()">
+    VALORAR
+    </button>
+    <button class="cancel-btn button" ng-click="cancel()">
+    CANCELAR
+    </button>
+</div>
+<div ng-show="extra.state == 'feedback'">
+    <h4>¿Cómo podemos mejorar Teamwin?</h4>
+    <textarea cols="100" rows="4" placeholder="Escribe tus comentarios aquí..." ng-model="extra.feedback"></textarea>
+    <button class="action-btn button" ng-click="sendFeedback()">
+    ENVIAR
+    </button>
+    <button class="cancel-btn button" ng-click="cancel()">
+    CANCELAR
+    </button>
+</div>
+<div ng-show="extra.state == 'end_ok'">
+    <h4><strong>¡Te has ganado +2 puntos extra!</strong></h4>
+    <h4>Además de los aciertos que consigas esta jornada, se te sumaran 2 puntos adicionales.</h4>
+    <button class="action-btn button" ng-click="cancel()">
+    CONTINUAR
+    </button>
+</div>
+<div ng-show="extra.state == 'end_error'">
+    <h4><strong>¡Oooops!</strong></h4>
+    <h4>No hemos podido darte los puntos adicionales debido a un error. Si quieres puedes volver a intentarlo. Disculpa las molestias.</h4>
+    <button class="action-btn button" ng-click="extra.state = 'initial'">
+    VOLVER A INTENTAR
+    </button>
+    <button class="cancel-btn button" ng-click="cancel()">
+    CANCELAR
+    </button>
+</div>

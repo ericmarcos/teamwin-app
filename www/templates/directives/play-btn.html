@@ -1,0 +1,6 @@
+<div class="play-btn" on-touch="startTouch()" on-release="endTouch()">
+  <div class="play-btn-shadow"></div>
+  <div class="play-btn-bg" ng-class="{'play-btn-bg-animating': animating}"></div>
+  <div class="play-btn-active" ng-if="animating"></div>
+  <div class="play-btn-number">{{caption}}</div>
+</div>

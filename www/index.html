@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+
+    <!-- compiled css output -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="lib/ionic-contrib-tinder-cards/ionic.tdcards.css" rel="stylesheet">
+    <link href="lib/ionic-rating/ionic-rating.css" rel="stylesheet">
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/angular-websocket/angular-websocket.js"></script>
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/angular-cached-resource/angular-cached-resource.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="lib/ionic-service-core/ionic-core.js"></script>
+    <script src="lib/ionic-service-push/ionic-push.js"></script>
+    <!--<script src="lib/ionic-service-deploy/ionic-deploy.js"></script>-->
+    <script src="lib/ionic-service-analytics/ionic-analytics.js"></script>
+    <script src="lib/ionic.ion.imagecachefactory.js"></script>
+    <script src="lib/ionic-rating/ionic-rating.js"></script>
+    <script src="lib/ionic-contrib-tinder-cards/ionic.tdcards.js"></script>
+    <script src="lib/collide/collide.js"></script>
+    <script src="lib/html2canvas/html2canvas.js"></script>
+    <script src="lib/ng-special-offer/src/ng-special-offer.js"></script>
+    <script src="lib/ngstorage/ngStorage.js"></script>
+    <!--<script type="text/javascript" src="lib/SocialSharing.js"></script>-->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <!-- <script src="cordova.js"></script> -->
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/controllers.js"></script>
+  </head>
+  <body ng-app="dareyoo">
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    <ion-nav-bar class="bar-dark">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view></ion-nav-view>
+    
+    <div id="fb-root"></div>
+
+    <!-- Need to place at the end to prevent appendChild error -->
+    <script src="lib/facebookConnectPlugin.js"></script>
+  </body>
+</html>

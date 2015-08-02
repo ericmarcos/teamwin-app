@@ -1,0 +1,20 @@
+<!--
+Create tabs with an icon and label, using the tabs-dark style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+<ion-tabs class="tabs-icon-top tabs-background-dark tabs-color-stable">
+
+  <ion-tab title="Premios" class="dareyoo-tab" icon-off="ion-ios-star" icon-on="ion-ios-star" ui-sref="tab.league">
+    <ion-nav-view name="tab-league"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="Jugar" class="dareyoo-tab" icon-off="ion-ios-football" icon-on="ion-ios-football" ui-sref="tab.play">
+    <ion-nav-view name="tab-play"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="Mis equipos" class="dareyoo-tab" icon-off="ion-ios-people" icon-on="ion-ios-people" ui-sref="tab.teams.current">
+    <ion-nav-view name="tab-teams"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>

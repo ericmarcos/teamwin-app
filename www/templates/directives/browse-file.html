@@ -1,0 +1,11 @@
+<div>
+    <input type="file" id="browseBtn" accept="image/*"/>
+    <div class="upload-btn" ng-click="browseFile()">
+        <div ng-show="!img_src && !working" class="edit-ico"></div>
+        <div class="file-browser-working" ng-show="working" ng-cloak>
+            <ion-spinner icon="ripple"></ion-spinner>
+        </div>
+        <img ng-show="!working" ng-src="{{img_src}}">
+        <div class="shield-ico"></div>
+    </div>
+</div>

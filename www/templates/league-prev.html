@@ -1,0 +1,8 @@
+<ion-list>
+  <div class="ranking-item" ng-repeat="team in league.prev_leaderboard">
+    <div class="position"><h1>{{$index+1}} -</h1></div>
+    <div class="pic"><team-avatar team="team"></team-avatar></div>
+    <div class="name"><h2>{{team.name}}</h2></div>
+    <div class="points"><h2>{{team.points}}</h2></div>
+  </div>
+</ion-list>

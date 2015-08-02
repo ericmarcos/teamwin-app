@@ -1,0 +1,26 @@
+<ion-view view-title="Fichar jugadores">
+  <ion-content class="market">
+    <ion-refresher
+      pulling-text=""
+      on-refresh="getMe();getTeams()">
+    </ion-refresher>
+    <div class="market-sign-buttons">
+      <!--<button class="fb-btn button" ng-click="shareViaFacebook()">
+        CON FACEBOOK
+      </button>-->
+      <button class="wa-btn button" ng-click="shareViaWhatsapp()">
+        CON WHATSAPP
+      </button>
+      <!--<button class="invite-team button button-positive" ng-click="shareAnywhere()">
+        CON OTRO CANAL
+      </button>-->
+    </div>
+    <h4 ng-if="me.friends.length">Tus amigos en el mercado</h4>
+    <h4 ng-if="!me.friends.length">No tienes amigos en el mercado</h4>
+    <div ng-repeat="user in me.friends" class="player {{get_status(user)}}" ng-click="user_click(user)">
+      <img ng-src="{{user.pic}}">
+      <h2>{{get_name(user)}}</h2>
+      <div class="overlay"></div>
+    </div>
+  </ion-content>
+</ion-view>

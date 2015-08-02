@@ -1,0 +1,26 @@
+<ion-view view-title="Mis equipos">
+  <ion-content>
+    <ion-refresher
+      pulling-text=""
+      on-refresh="getTeams()">
+    </ion-refresher>
+    <button class="create-team button button-positive" ui-sref="tab.new-team">
+    CREA UN EQUIPO
+    </button>
+
+    <div class="tabs teams-tabs">
+      <a class="tab-item" ng-class="{'active':isWaitingActive()}" ui-sref="tab.teams.waiting">
+        En espera<span ng-if="waiting_teams.length"> ({{waiting_teams.length}})</span>
+      </a>
+      <a class="tab-item" ng-class="{'active':isCurrentActive()}" ui-sref="tab.teams.current">
+        Actuales
+      </a>
+      <a class="tab-item" ng-class="{'active':isFriendsActive()}" ui-sref="tab.teams.friends">
+        Unirme
+      </a>
+    </div>
+
+    <ui-view name="teams"></ui-view>
+
+  </ion-content>
+</ion-view>
