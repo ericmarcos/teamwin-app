@@ -3490,11 +3490,9 @@ team-avatar {
 /******* TEAM DETAIL **********/
 .team-detail {
   padding-top: 15px !important; }
-  .team-detail .left {
-    height: 100px; }
-    .team-detail .left team-avatar .team-avatar .shield-ico {
-      width: 28px;
-      height: 34px; }
+  .team-detail .left team-avatar .team-avatar .shield-ico {
+    width: 28px;
+    height: 34px; }
   .team-detail .right {
     position: relative; }
     .team-detail .right img {
