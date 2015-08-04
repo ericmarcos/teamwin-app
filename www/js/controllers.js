@@ -305,7 +305,8 @@ angular.module('dareyoo.controllers', [])
     $scope.init();
   });
   $scope.$on('teams-loaded', function() {
-    $scope.init();
+    if($state.includes("on-board-join-team"))
+      $scope.init();
   });
   $scope.init();
 })
@@ -355,7 +356,8 @@ angular.module('dareyoo.controllers', [])
   });
 
   $scope.$on('leagues-loaded', function() {
-    $scope.init_league();
+    if($state.includes("tab.league"))
+      $scope.init_league();
   });
 
   $scope.getPrizePic = function() {
@@ -514,7 +516,8 @@ angular.module('dareyoo.controllers', [])
     $scope.init_team();
   }
   $rootScope.$on('teams-loaded',function(event){
-    $scope.init_team();
+    if($state.includes("tab.team-detail"))
+      $scope.init_team();
   });
   $scope.canFire = function(team, player) {
     return $scope.me.id != player.id && $scope.me.id == team.captain.id;
@@ -1008,7 +1011,8 @@ angular.module('dareyoo.controllers', [])
   }
 
   $scope.$on('pools-loaded', function() {
-    $scope.init();
+    if($state.includes("tab.play"))
+      $scope.init();
   });
 
   $scope.$on('$ionicView.enter', function() {
