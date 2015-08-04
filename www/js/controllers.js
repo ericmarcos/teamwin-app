@@ -243,9 +243,9 @@ angular.module('dareyoo.controllers', [])
 
   $ionicAnalytics.track('on_board_invite');
 
-  var message = "Ayúdame a ganar 50€ cada semana con mi equipo " + $scope.team.name + "!";
+  var message = "Únete a mi equipo " + $scope.team.name + ", ¡Podemos ganar 50€ cada semana!\nPuedes descargarte la app en Google Play (play.google.com/store/apps/details?id=com.dareyoo.teamwin) o Apple Store (appstore.com/teamwin)";
   var image = "";
-  var link = "http://www.teamwinapp.com";
+  var link = "";
   $scope.shareViaFacebook = function() {
     console.log("FB share click");
     var kk = $cordovaSocialSharing.canShareVia('com.apple.social.facebook', message, null, null, null, function(e){
@@ -622,20 +622,21 @@ angular.module('dareyoo.controllers', [])
   $ionicAnalytics.track('team_market', {team_id: $stateParams.teamId});
 
   $scope.team = Team.get({teamId: $stateParams.teamId});
-  var message = "¡Ayúdame a ganar 50€ cada semana con mi equipo " + $scope.team.name + "!";
-  var image = "";
-  var link = "http://www.teamwinapp.com";
-  $scope.shareViaFacebook = function(message, image, link) {
+  
+  $scope.shareViaFacebook = function() {
     $cordovaSocialSharing.canShareVia("facebook", message, image, link).then(function(result) {
       $cordovaSocialSharing.shareViaFacebook(message, image, link);
     });
   };
-  $scope.shareViaWhatsapp = function(message, image, link) {
+  $scope.shareViaWhatsapp = function() {
+    var message = "Únete a mi equipo " + $scope.team.name + ", ¡Podemos ganar 50€ cada semana!\nPuedes descargarte la app en Google Play (play.google.com/store/apps/details?id=com.dareyoo.teamwin) o Apple Store (appstore.com/teamwin)";
+    var image = "";
+    var link = "";
     $cordovaSocialSharing.canShareVia("whatsapp", message, image, link).then(function(result) {
       $cordovaSocialSharing.shareViaWhatsApp(message, image, link);
     });
   };
-  $scope.shareAnywhere = function(message, image, link) {
+  $scope.shareAnywhere = function() {
     $cordovaSocialSharing.share("", message, image, link);
   };
 
