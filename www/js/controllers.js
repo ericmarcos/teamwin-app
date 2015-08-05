@@ -116,7 +116,8 @@ angular.module('dareyoo.controllers', [])
     $scope.continue = function() {
       $scope.state = 'loading';
       $scope.loading_msg = "Elaborando estrategia...";
-      $scope.me.ionic_id = $ionicUser.generateGUID()
+      $scope.me.ionic_id = $ionicUser.generateGUID();
+      
       $ionicPush.register({
         canShowAlert: false, //Should new pushes show an alert on your screen?
         canSetBadge: true, //Should new pushes be allowed to update app icon badges?
@@ -164,8 +165,9 @@ angular.module('dareyoo.controllers', [])
       }).then(function(deviceToken) {
         $scope.me.device_token = deviceToken;
         $scope.me.$update({}, function(){ $scope.next_screen(); });
+      }, function() {
+        $scope.me.$update({}, function(){ $scope.next_screen(); });
       });
-      //$scope.me.$update({}, function(){ $scope.next_screen(); }); //////////////////// REMOVE THIS!!!!
       $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
         $scope.me.device_token = data.token;
         $scope.me.$update({}, function(){ $scope.next_screen(); });
