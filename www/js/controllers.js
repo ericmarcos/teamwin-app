@@ -748,7 +748,7 @@ angular.module('dareyoo.controllers', [])
    };
 })
 
-.controller('PlayCtrl', function($scope, $rootScope, $ionicLoading, $localstorage, $ionicUser, $interval, $timeout, $filter, $ionicAnalytics, $ionicPopup, $specialOffer, Pool, User, conf) {
+.controller('PlayCtrl', function($scope, $rootScope, $state, $ionicLoading, $localstorage, $ionicUser, $interval, $timeout, $filter, $ionicAnalytics, $ionicPopup, $specialOffer, Pool, User, conf) {
   $ionicAnalytics.track('play');
 
   $scope.explanation_seen = $localstorage.get('explanation_seen');
