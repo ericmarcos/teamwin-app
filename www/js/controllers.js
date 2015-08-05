@@ -292,6 +292,8 @@ angular.module('dareyoo.controllers', [])
       $rootScope.getAllInfo(true).then(function(data) {
         $scope.state = "finish";
       });
+    }, function() {
+      $scope.state = "error";
     });
   };
   $scope.play = function() {

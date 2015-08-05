@@ -16,6 +16,13 @@
     <h2 ng-if="loading_msg">{{loading_msg}}</h2>
     <ion-spinner icon="crescent"></ion-spinner>
 </div>
+<div ng-show="state == 'error'">
+    <h4>Este equipo ya está lleno</h4>
+    <p>Por favor, elige otro equipo o crea el tuyo.</p>
+    <button class="start-playing button" ng-click="cancel()">
+    ACEPTAR
+    </button>
+</div>
 <div ng-show="state == 'finish'">
     <h1>¡Has fichado por<br>{{team.name}}!</h1>
     <button class="start-playing button" ng-click="play()">
