@@ -628,16 +628,20 @@ angular.module('dareyoo.controllers', [])
   $scope.team = Team.get({teamId: $stateParams.teamId});
   
   $scope.shareViaFacebook = function() {
-    $cordovaSocialSharing.canShareVia("facebook", message, image, link).then(function(result) {
-      $cordovaSocialSharing.shareViaFacebook(message, image, link);
+    var pkg = ionic.Platform.isIOS() ? "com.apple.social.facebook" : "com.facebook.orca";
+    var message = "Únete a mi equipo " + $scope.team.name + ", ¡Podemos ganar 50€ cada semana!\nPuedes descargarte la app en Google Play (play.google.com/store/apps/details?id=com.dareyoo.teamwin) o Apple Store (appstore.com/teamwin)";
+    $cordovaSocialSharing.canShareVia(pkg, message).then(function(result) {
+      $cordovaSocialSharing.shareViaFacebook(message);
+    }, function(res) {
+      console.log("can't share!", res);
     });
   };
   $scope.shareViaWhatsapp = function() {
     var message = "Únete a mi equipo " + $scope.team.name + ", ¡Podemos ganar 50€ cada semana!\nPuedes descargarte la app en Google Play (play.google.com/store/apps/details?id=com.dareyoo.teamwin) o Apple Store (appstore.com/teamwin)";
-    var image = "";
-    var link = "";
-    $cordovaSocialSharing.canShareVia("whatsapp", message, image, link).then(function(result) {
-      $cordovaSocialSharing.shareViaWhatsApp(message, image, link);
+    $cordovaSocialSharing.canShareVia("whatsapp", message).then(function(result) {
+      $cordovaSocialSharing.shareViaWhatsApp(message);
+    }, function(res) {
+      console.log("can't share! ", res);
     });
   };
   $scope.shareAnywhere = function() {
