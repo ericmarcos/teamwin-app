@@ -248,7 +248,7 @@ angular.module('dareyoo.controllers', [])
 
   $ionicAnalytics.track('on_board_invite');
 
-  var message = "Únete a mi equipo " + $scope.team.name + ", ¡Podemos ganar 50€ cada semana!\nPuedes descargarte la app en Google Play (play.google.com/store/apps/details?id=com.dareyoo.teamwin) o Apple Store (appstore.com/teamwin)";
+  var message = "Únete a mi equipo " + $scope.team.name + ", ¡Podemos ganar 50€ cada semana!\nPuedes descargarte la app en Google Play (play.google.com/store/apps/details?id=com.dareyoo.teamwin&referrer=shared_on_board_whatsapp) o Apple Store (appstore.com/teamwin)";
   var image = "";
   var link = "";
   $scope.shareViaFacebook = function() {
@@ -263,8 +263,9 @@ angular.module('dareyoo.controllers', [])
     });*/
   };
   $scope.shareViaWhatsapp = function() {
-    $cordovaSocialSharing.canShareVia("whatsapp", message, image, link).then(function(result) {
-      $cordovaSocialSharing.shareViaWhatsApp(message, image, link);
+    $cordovaSocialSharing.canShareVia("whatsapp", message).then(function(result) {
+      $cordovaSocialSharing.shareViaWhatsApp(message);
+      $ionicAnalytics.track('shared_on_board_whatsapp');
     });
   };
   $scope.shareAnywhere = function(message, image, link) {
@@ -640,9 +641,10 @@ angular.module('dareyoo.controllers', [])
     });
   };
   $scope.shareViaWhatsapp = function() {
-    var message = "Únete a mi equipo " + $scope.team.name + ", ¡Podemos ganar 50€ cada semana!\nPuedes descargarte la app en Google Play (play.google.com/store/apps/details?id=com.dareyoo.teamwin) o Apple Store (appstore.com/teamwin)";
+    var message = "Únete a mi equipo " + $scope.team.name + ", ¡Podemos ganar 50€ cada semana!\nPuedes descargarte la app en Google Play (play.google.com/store/apps/details?id=com.dareyoo.teamwin&referrer=shared_sign_whatsapp) o Apple Store (appstore.com/teamwin)";
     $cordovaSocialSharing.canShareVia("whatsapp", message).then(function(result) {
       $cordovaSocialSharing.shareViaWhatsApp(message);
+      $ionicAnalytics.track('shared_sign_whatsapp');
     }, function(res) {
       console.log("can't share! ", res);
     });
@@ -977,6 +979,7 @@ angular.module('dareyoo.controllers', [])
         $scope.league.$extra_points({type: 'extra_type_rate', data: $scope.extra.rate}, function() {
           $scope.extra.state = 'end_ok';
           $scope.just_did_extra_points = true;
+          $ionicAnalytics.track('rated_app');
         }, function(){
           $scope.extra.state = 'end_error';
         });
@@ -997,12 +1000,14 @@ angular.module('dareyoo.controllers', [])
     $scope.league.$extra_points({type: 'extra_type_feedback', data: $scope.extra.feedback}, function() {
       $scope.extra.state = 'end_ok';
       $scope.just_did_extra_points = true;
+      $ionicAnalytics.track('sent_feedback');
     }, function(){
       $scope.extra.state = 'end_error';
     });
   };
 
   $scope.extraPoints = function() {
+    $ionicAnalytics.track('extra_points');
     $scope.extra = {};
     $scope.extra.state = 'initial';
     $scope.extra.rate = 5;
