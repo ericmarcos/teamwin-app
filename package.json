@@ -23,7 +23,11 @@
     "cordova-plugin-statusbar",
     "cordova-plugin-inappbrowser",
     "nl.x-services.plugins.socialsharing",
-    "cordova-plugin-dialogs"
+    "cordova-plugin-dialogs",
+    {
+      "locator": "https://github.com/MobileChromeApps/google-play-services.git",
+      "id": "com.google.playservices"
+    }
   ],
   "cordovaPlatforms": [
     "ios",
