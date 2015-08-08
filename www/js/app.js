@@ -71,6 +71,10 @@ angular.module('dareyoo', [
       console.log('WATCH RESULT', hasUpdate);
     });*/
 
+    window.applicationPreferences.get("referrer", function(value) {
+      $ionicAnalytics.track('referrer_' + value);
+    });
+
     $rootScope.setAuth = function(auth) {
       if(auth && Object.keys(auth).length !== 0) {
         $rootScope.auth = auth;

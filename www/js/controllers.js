@@ -116,7 +116,8 @@ angular.module('dareyoo.controllers', [])
     $scope.continue = function() {
       $scope.state = 'loading';
       $scope.loading_msg = "Elaborando estrategia...";
-      $scope.me.ionic_id = $ionicUser.generateGUID();
+      if(!$scope.me.ionic_id)
+        $scope.me.ionic_id = $ionicUser.generateGUID();
       
       $ionicPush.register({
         canShowAlert: false, //Should new pushes show an alert on your screen?
@@ -161,7 +162,9 @@ angular.module('dareyoo.controllers', [])
         }
       }, {
         user_id: $scope.me.ionic_id,
-        name: $scope.me.username
+        name: $scope.me.username,
+        platform: ionic.Platform.platform(),
+        device: ionic.Platform.device()
       }).then(function(deviceToken) {
         $scope.me.device_token = deviceToken;
         $scope.me.$update({}, function(){ $scope.next_screen(); });
