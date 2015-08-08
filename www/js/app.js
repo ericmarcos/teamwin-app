@@ -71,11 +71,11 @@ angular.module('dareyoo', [
       console.log('WATCH RESULT', hasUpdate);
     });*/
 
-    if(typeof analytics !== undefined) {
+    /*if(typeof analytics !== undefined) {
       analytics.startTrackerWithId("UA-40904039-2");
       //https://developers.google.com/analytics/devguides/collection/ios/v3/optional-features#idfa
       //analytics.enableAdvertisingIdCollection(true);
-    }
+    }*/
 
     window.applicationPreferences.get("referrer", function(value) {
       $ionicAnalytics.track('referrer_' + value);
@@ -166,8 +166,8 @@ angular.module('dareyoo', [
     $rootScope.getMe = function() {
       $rootScope.me = User.me();
       return $rootScope.me.$promise.then(function(){
-        if(typeof analytics !== undefined && $rootScope.me.ionic_id)
-          window.analytics.setUserId($rootScope.me.ionic_id);
+        //if(typeof analytics !== undefined && $rootScope.me.ionic_id)
+        //  window.analytics.setUserId($rootScope.me.ionic_id);
         return $ImageCacheFactory.Cache([$rootScope.me.pic]).then(function(){
           $rootScope.$broadcast('me-loaded');
         });
