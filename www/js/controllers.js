@@ -2,6 +2,7 @@ angular.module('dareyoo.controllers', [])
 
 .controller('WinnerCtrl', function($scope, $rootScope, $state, $ionicAnalytics, conf) {
   $ionicAnalytics.track('winner');
+  if(typeof analytics !== undefined) analytics.trackView("winner");
 
   $scope.share = function() {
     //https://github.com/Wizcorp/phonegap-facebook-plugin/blob/master/TROUBLESHOOTING.md#missing-facebookconnectplugin
@@ -19,6 +20,7 @@ angular.module('dareyoo.controllers', [])
     }, 
     function (response) {
       $ionicAnalytics.track('shared_win');
+      if(typeof analytics !== undefined) analytics.trackEvent("Share", 'win', 'facebook');
     },
     function (response) {  });
   };
@@ -26,7 +28,8 @@ angular.module('dareyoo.controllers', [])
 })
 .controller('LoginCtrl', function($scope, $rootScope, $state, $http, $filter, $ionicUser, $ionicPush, $ionicPopup, $ionicAnalytics, $ionicPopup, conf) {
 
-    $ionicAnalytics.track('downloaded');
+    $ionicAnalytics.track('login');
+    if(typeof analytics !== undefined) analytics.trackView("login");
 
     var colors = ["#FE3B3B","#FBA02D","#39FF68","#FA08CA"];
     $scope.slideHasChanged = function(i) {
@@ -49,6 +52,7 @@ angular.module('dareyoo.controllers', [])
       if (!response.authResponse){
         $scope.login_error();
         $ionicAnalytics.track('register_error', {via:'facebook'});
+        if(typeof analytics !== undefined) analytics.trackException('register_error', false);
         return;
       }
       if (response.status === 'connected') {
@@ -62,6 +66,7 @@ angular.module('dareyoo.controllers', [])
           }
           $http(req).success(function(resp){
             $ionicAnalytics.track('registered', {via:'facebook'});
+            if(typeof analytics !== undefined) analytics.trackException('register_error', false);
             $rootScope.setAuth(resp);
             $rootScope.getAllInfo().then(function(){ $scope.state = 'push'; });
           }).error(function(){
@@ -69,11 +74,13 @@ angular.module('dareyoo.controllers', [])
           });
       } else {
           $ionicAnalytics.track('register_error', {via:'facebook'});
+          if(typeof analytics !== undefined) analytics.trackException('register_error', false);
           $scope.login_error();
       }
     };
     var fbLoginError = function(response) {
       $ionicAnalytics.track('register_error', {via:'facebook'});
+      if(typeof analytics !== undefined) analytics.trackException('register_error', false);
       $scope.login_error();
     };
 
@@ -116,8 +123,10 @@ angular.module('dareyoo.controllers', [])
     $scope.continue = function() {
       $scope.state = 'loading';
       $scope.loading_msg = "Elaborando estrategia...";
-      if(!$scope.me.ionic_id)
+      if(!$scope.me.ionic_id) {
         $scope.me.ionic_id = $ionicUser.generateGUID();
+        if(typeof analytics !== undefined) window.analytics.setUserId($scope.me.ionic_id);
+      }
       
       $ionicPush.register({
         canShowAlert: false, //Should new pushes show an alert on your screen?
@@ -194,6 +203,7 @@ angular.module('dareyoo.controllers', [])
 .controller('OnBoardNewTeamCtrl', function($scope, $rootScope, $state, $q, $http, $ionicPopup, $ionicAnalytics, $ImageCacheFactory, blob, conf, $cordovaStatusbar, Team) {
 
   $ionicAnalytics.track('on_board_new_team');
+  if(typeof analytics !== undefined) analytics.trackView("on_board_new_team");
 
   $rootScope.team = new Team();
   $scope.avatar = null;
@@ -247,6 +257,7 @@ angular.module('dareyoo.controllers', [])
 .controller('OnBoardInviteCtrl', function($rootScope, $scope, $cordovaSocialSharing, $ionicAnalytics) {
 
   $ionicAnalytics.track('on_board_invite');
+  if(typeof analytics !== undefined) analytics.trackView("on_board_invite");
 
   var message = "Únete a mi equipo " + $scope.team.name + ", ¡Podemos ganar 50€ cada semana!\nPuedes descargarte la app en Google Play (play.google.com/store/apps/details?id=com.dareyoo.teamwin&referrer=shared_on_board_whatsapp) o Apple Store (appstore.com/teamwin)";
   var image = "";
@@ -266,6 +277,7 @@ angular.module('dareyoo.controllers', [])
     $cordovaSocialSharing.canShareVia("whatsapp", message).then(function(result) {
       $cordovaSocialSharing.shareViaWhatsApp(message);
       $ionicAnalytics.track('shared_on_board_whatsapp');
+      if(typeof analytics !== undefined) analytics.trackEvent("Share", 'on board', 'whatsapp');
     });
   };
   $scope.shareAnywhere = function(message, image, link) {
@@ -276,6 +288,7 @@ angular.module('dareyoo.controllers', [])
 .controller('OnBoardJoinTeamCtrl', function($scope, $rootScope, $state, $q, $ionicPopup, $ionicAnalytics, $filter) {
 
   $ionicAnalytics.track('on_board_join_team');
+  if(typeof analytics !== undefined) analytics.trackView("on_board_join_team");
 
   $scope.check_team = function(team) {
     $scope.team = team;
@@ -321,6 +334,7 @@ angular.module('dareyoo.controllers', [])
 
 .controller('LeagueCtrl', function($sce, $scope, $rootScope, $state, $ionicAnalytics, $ionicScrollDelegate, $timeout, League) {
   $ionicAnalytics.track('league');
+  if(typeof analytics !== undefined) analytics.trackView("league");
   $scope.show_desc = false;
   $scope.prizeDesc = function() {
     return $sce.trustAsHtml($scope.getPrizeDesc());
@@ -388,6 +402,7 @@ angular.module('dareyoo.controllers', [])
 
 .controller('TeamsCtrl', function($scope, $rootScope, $state, $timeout, $filter, $ionicPopup, $ionicAnalytics) {
   $ionicAnalytics.track('teams');
+  if(typeof analytics !== undefined) analytics.trackView("teams");
 
   $scope.isWaitingActive = function() { return $state.includes("tab.teams.waiting") };
   $scope.isCurrentActive = function() { return $state.includes("tab.teams.current") };
@@ -444,7 +459,8 @@ angular.module('dareyoo.controllers', [])
 })
 
 .controller('NewTeamCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicNavBarDelegate, $ionicHistory, $ionicAnalytics, Team) {
-  $ionicAnalytics.track('teams');
+  $ionicAnalytics.track('new_team');
+  if(typeof analytics !== undefined) analytics.trackView("new_team");
 
   $scope.back = function() {
     $ionicHistory.goBack();
@@ -495,6 +511,7 @@ angular.module('dareyoo.controllers', [])
 
 .controller('TeamDetailCtrl', function($scope, $rootScope, $stateParams, $state, $timeout, $ionicPopup, $ionicAnalytics, Team) {
   $ionicAnalytics.track('team_detail', {team_id: $stateParams.teamId});
+  if(typeof analytics !== undefined) analytics.trackView("team_detail");
 
   $scope.prev_total_points = 0;
   $scope.leaderboard = [];
@@ -628,6 +645,7 @@ angular.module('dareyoo.controllers', [])
 
 .controller('TeamMarketCtrl', function($rootScope, $scope, $timeout, $stateParams, $filter, $cordovaSocialSharing, $ionicPopup, $ionicAnalytics, Team) {
   $ionicAnalytics.track('team_market', {team_id: $stateParams.teamId});
+  if(typeof analytics !== undefined) analytics.trackView("team_market");
 
   $scope.team = Team.get({teamId: $stateParams.teamId});
   
@@ -645,6 +663,7 @@ angular.module('dareyoo.controllers', [])
     $cordovaSocialSharing.canShareVia("whatsapp", message).then(function(result) {
       $cordovaSocialSharing.shareViaWhatsApp(message);
       $ionicAnalytics.track('shared_sign_whatsapp');
+      if(typeof analytics !== undefined) analytics.trackEvent("Share", 'market', 'whatsapp');
     }, function(res) {
       console.log("can't share! ", res);
     });
@@ -759,6 +778,7 @@ angular.module('dareyoo.controllers', [])
 
 .controller('PlayCtrl', function($scope, $rootScope, $state, $ionicLoading, $localstorage, $ionicUser, $interval, $timeout, $filter, $ionicAnalytics, $ionicPopup, $specialOffer, Pool, User, conf) {
   $ionicAnalytics.track('play');
+  if(typeof analytics !== undefined) analytics.trackView("play");
 
   $scope.explanation_seen = $localstorage.get('explanation_seen');
   $scope.accept_explanation = function() {
@@ -876,6 +896,7 @@ angular.module('dareyoo.controllers', [])
   };
   $scope.cardDestroyed = function(index) {
     $ionicAnalytics.track('played');
+    if(typeof analytics !== undefined) analytics.trackEvent("played", 'game');
     $timeout(function(){
       var removed_pool = $scope.swipe_pools.splice(index, 1);
       if($scope.swipe_pools.length) {
@@ -951,6 +972,7 @@ angular.module('dareyoo.controllers', [])
       }, 
       function (response) {
         $ionicAnalytics.track('shared_fixture');
+        if(typeof analytics !== undefined) analytics.trackEvent("Share", 'extra_points', 'facebook');
         $scope.league.$extra_points({type: 'extra_type_share_fb'}, function() {
           $scope.extra.state = 'end_ok';
           $scope.just_did_extra_points = true;
@@ -980,6 +1002,7 @@ angular.module('dareyoo.controllers', [])
           $scope.extra.state = 'end_ok';
           $scope.just_did_extra_points = true;
           $ionicAnalytics.track('rated_app');
+          if(typeof analytics !== undefined) analytics.trackEvent("Rate", 'extra_points');
         }, function(){
           $scope.extra.state = 'end_error';
         });
@@ -1001,6 +1024,7 @@ angular.module('dareyoo.controllers', [])
       $scope.extra.state = 'end_ok';
       $scope.just_did_extra_points = true;
       $ionicAnalytics.track('sent_feedback');
+      if(typeof analytics !== undefined) analytics.trackEvent("Feedback", 'extra_points');
     }, function(){
       $scope.extra.state = 'end_error';
     });
@@ -1008,6 +1032,7 @@ angular.module('dareyoo.controllers', [])
 
   $scope.extraPoints = function() {
     $ionicAnalytics.track('extra_points');
+    if(typeof analytics !== undefined) analytics.trackView("extra_points");
     $scope.extra = {};
     $scope.extra.state = 'initial';
     $scope.extra.rate = 5;
