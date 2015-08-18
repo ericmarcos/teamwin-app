@@ -600,7 +600,7 @@ angular.module('dareyoo.controllers', [])
     
   };
   $scope.sign = function(player) {
-    if($scope.team.players < 11) {
+    if($scope.team.players.length < 11) {
       $timeout(function(){
         $scope.leaderboard.push(player);
         var i = $scope.team.players_waiting_captain.indexOf(player);
@@ -728,7 +728,7 @@ angular.module('dareyoo.controllers', [])
      });
       
     } else if(status == 'pending_captain') {
-      if($scope.team.players < 11) {
+      if($scope.team.players.length < 11) {
         $scope.showConfirm('Aceptar fichaje', $scope.get_name(user) + ' te ha enviado una solicitud para entrar en tu equipo ¿Quieres aceptarlo?').then(function(res) {
          if(res) {
           $timeout(function(){

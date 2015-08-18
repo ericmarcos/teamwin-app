@@ -76,10 +76,11 @@ angular.module('dareyoo', [
       //https://developers.google.com/analytics/devguides/collection/ios/v3/optional-features#idfa
       //analytics.enableAdvertisingIdCollection(true);
     }*/
-
-    window.applicationPreferences.get("referrer", function(value) {
-      $ionicAnalytics.track('referrer_' + value);
-    });
+    if(window.applicationPreferences) {
+      window.applicationPreferences.get("referrer", function(value) {
+        $ionicAnalytics.track('referrer_' + value);
+      });
+    }
 
     $rootScope.setAuth = function(auth) {
       if(auth && Object.keys(auth).length !== 0) {
