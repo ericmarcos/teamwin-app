@@ -264,10 +264,9 @@ angular.module('dareyoo.controllers', [])
   var link = "";
   $scope.shareViaFacebook = function() {
     console.log("FB share click");
-    var kk = $cordovaSocialSharing.canShareVia('com.apple.social.facebook', message, null, null, null, function(e){
+    $cordovaSocialSharing.canShareVia('com.apple.social.facebook', message, null, null, null, function(e){
       $cordovaSocialSharing.shareViaFacebookWithPasteMessageHint(message, null /* img */, null /* url */, message, function() {console.log('share FB ok')}, function(errormsg){console.log("Error sharing on FB: ", errormsg)});
     }, function(e){console.log("Cant share on FB: ", e)})
-    console.log(kk);
     $cordovaSocialSharing.shareViaFacebookWithPasteMessageHint(message, null /* img */, null /* url */, message, function() {console.log('share FB ok')}, function(errormsg){console.log("Error sharing on FB: ", errormsg)});
     /*$cordovaSocialSharing.canShareVia("facebook", message, image, link).then(function(result) {
       $cordovaSocialSharing.shareViaFacebook(message, image, link);
@@ -705,7 +704,6 @@ angular.module('dareyoo.controllers', [])
     u.$match({league_id:1, team_id: $scope.team.id, prev: $scope.isPrevActive()? 1 : 0}, function(res){
       $scope.player_popup_state = 'loaded';
       $scope.match = res;
-      console.log($scope.match);
     });
   };
 })
