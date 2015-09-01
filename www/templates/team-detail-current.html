@@ -19,7 +19,7 @@
   <div class="item item-divider">
     <h4>Puntos<span class="pool-hit"></span><span class="pool-shared"></span></h4>
   </div>
-  <ion-item class="item-remove-animate item-avatar item-icon-right team-detail-item" ng-repeat="player in leaderboard" type="item-text-wrap">
+  <ion-item class="item-remove-animate item-avatar item-icon-right team-detail-item" ng-repeat="player in leaderboard" type="item-text-wrap" ng-click='showPlayerSummary(player)'>
     <img ng-src="{{player.pic}}" class="team-player-pic">
     <div class="team-player-name"><h2>{{get_name(player)}}</h2></div>
     <span class="played-icon">

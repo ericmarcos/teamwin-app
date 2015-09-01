@@ -1,0 +1,40 @@
+<div class="loading" ng-show="player_popup_state == 'loading'">
+    <h2 ng-if="loading_msg">{{loading_msg}}</h2>
+    <ion-spinner icon="crescent"></ion-spinner>
+</div>
+<div ng-show="player_popup_state == 'loaded'" class="player-summary">
+    <ion-scroll class="pool-list pool-list-mini">
+        <img ng-src="{{player.pic}}" class="player-pic">
+        <button ng-if="!isFriend(player)" class="base-btn button" ng-click="addFriend(player)">
+            Añadir a {{ get_name(player) }}
+        </button>
+        <h4 ng-if="isFriend(player)">{{ get_name(player) }}</h4>
+    
+      <div class="pool" ng-repeat="p in match.pools" ng-class="{'fail':isFail(p)}">
+        <div class="left"><img ng-src="{{p.options[0].pic}}"><div class="team-name">{{p.options[0].short_name}}</div></div>
+        <div class="middle" ng-class="{'win':isWin(p)}">{{p.user_result || ""}}</div>
+        <div class="right"><img ng-src="{{p.options[1].pic}}"><div class="team-name">{{p.options[1].short_name}}</div></div>
+      </div>
+      <div class="pool">
+        <div class="left"><div class="team-name">Aciertos</div></div>
+        <div class="middle">{{nWins()}}</div>
+      </div>
+      <div class="pool">
+        <div class="left"><div class="team-name">Extra</div></div>
+        <div class="middle" ng-show="match.extra_points">+2</div>
+        <div class="middle" ng-hide="match.extra_points">0</div>
+      </div>
+      <div class="pool">
+        <div class="left"><div class="team-name">Puntos</div></div>
+        <div class="middle win" ng-show="match.extra_points">{{nWins()+2}}</div>
+        <div class="middle win" ng-hide="match.extra_points">{{nWins()}}</div>
+      </div>
+    </ion-scroll>
+</div>
+<div ng-show="player_popup_state == 'added_friend'">
+    <h4>{{ get_name(player) }} se ha añadido a tu mercado de fichajes.</h4>
+    <h5>Ahora podrás fichar a {{ get_name(player) }} en la pantalla "Fichar jugadores" dentro de "Mis equipos".</h5>
+</div>
+<button class="close-btn button" ng-click="close_player_popup()">
+    <i class="icon ion-close-round"></i>
+</button>

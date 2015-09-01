@@ -231,7 +231,7 @@ angular.module('dareyoo.controllers', [])
           scope: $scope
         });
 
-      $scope.team.$save().$promise.then(function(res) {
+      $scope.team.$save().then(function(res) {
         $ionicAnalytics.track('on_board_created_team');
         $scope.team.upload_avatar($scope.avatar.image).success(function(response){
           $scope.league.$enroll({team_id:$scope.team.id}, function(){
@@ -504,7 +504,7 @@ angular.module('dareyoo.controllers', [])
           cssClass: "popup-join-team",
           scope: $scope
         });
-      $scope.team.$save().$promise.then(function(res) {
+      $scope.team.$save().then(function(res) {
         
         $scope.team.upload_avatar($scope.avatar.image).success(function(response){
           $scope.league.$enroll({team_id:$scope.team.id}, function(){
@@ -520,22 +520,26 @@ angular.module('dareyoo.controllers', [])
   };
 })
 
-.controller('TeamDetailCtrl', function($scope, $rootScope, $stateParams, $state, $timeout, $ionicPopup, $ionicAnalytics, Team) {
+.controller('TeamDetailCtrl', function($scope, $rootScope, $stateParams, $filter, $state, $timeout, $ionicPopup, $ionicScrollDelegate, $ionicAnalytics, Team, User) {
   $ionicAnalytics.track('team_detail', {team_id: $stateParams.teamId});
   //if(typeof analytics !== undefined) analytics.trackView("team_detail");
 
   $scope.prev_total_points = 0;
   $scope.leaderboard = [];
   $scope.prev_leaderboard = [];
-  $scope.isCurrentActive = function() { return $state.includes("tab.team-detail.current") };
-  $scope.isPrevActive = function() { return $state.includes("tab.team-detail.prev") };
+  $scope.isCurrentActive = function() {
+    return $state.includes("tab.league-team-detail.current") || $state.includes("tab.team-detail.current");
+  };
+  $scope.isPrevActive = function() { 
+    return $state.includes("tab.league-team-detail.prev") || $state.includes("tab.team-detail.prev");
+  };
   $scope.init_team = function() {
     var teams = $rootScope.teams.filter(function(elem){ return elem.id == $stateParams.teamId; });
     if(!teams.length)
       teams = $rootScope.waiting_teams.filter(function(elem){ return elem.id == $stateParams.teamId; });
     if(!teams.length)
       teams = $rootScope.friend_teams.filter(function(elem){ return elem.id == $stateParams.teamId; });
-    if(!teams.length)
+    if(!teams.length && $rootScope.query && $rootScope.query.results)
       teams = $rootScope.query.results.filter(function(elem){ return elem.id == $stateParams.teamId; });
     if(teams.length) {
       $scope.team = teams[0];
@@ -545,10 +549,16 @@ angular.module('dareyoo.controllers', [])
         return p + c.points;
       }, 0);
     } else {
-      $scope.team = Team.get({teamId:$stateParams.teamId});
+      $scope.team = Team.get({teamId:$stateParams.teamId}, function(){
+        $scope.leaderboard = $scope.team.leagues[0].leaderboard;
+        $scope.prev_leaderboard = $scope.team.leagues[0].prev_leaderboard;
+        $scope.prev_total_points = $scope.team.leagues[0].prev_leaderboard.reduce(function(p, c, i, a) {
+          return p + c.points;
+        }, 0);
+      });
     }
     if(!$scope.isCurrentActive() && !$scope.isPrevActive())
-      $state.go('tab.team-detail.current', {teamId: $stateParams.teamId});
+      $state.go('.current', {teamId: $stateParams.teamId});
   };
   if($scope.teams && $scope.teams.length) {
     $scope.init_team();
@@ -654,6 +664,50 @@ angular.module('dareyoo.controllers', [])
       $scope.waiting_teams.push($scope.team);
     });
   };
+  $scope.isFriend = function(user) {
+    var is_friend = $filter("filter")($scope.me.friends, function(player) { return player.id == user.id; });
+    if(is_friend && is_friend.length > 0)
+      return true;
+    return false;
+  };
+  $scope.addFriend = function(player) {
+    $scope.me.$add_friend({friend_id: player.id}, function(){
+      $scope.getMe();
+      $scope.player_popup_state = 'added_friend';
+    });
+  };
+  $scope.isWin = function(p) {
+    return p.state == 'state_set' && p.result == p.user_result;
+  };
+
+  $scope.nWins = function(p) {
+    if($scope.match && $scope.match.pools)
+      return $filter("filter")($scope.match.pools, $scope.isWin).length;
+    return 0;
+  };
+
+  $scope.isFail = function(p) {
+    return p.state == 'state_set' && p.result != p.user_result && p.result != null;
+  };
+  $scope.showPlayerSummary = function(player) {
+    $scope.player = player;
+    $scope.player_popup_state = 'loading';
+    $scope.close_player_popup = function() { $scope.playerPopup.close(); };
+    $scope.playerPopup = $scope.loading_popup = $ionicPopup.show({
+      templateUrl: "templates/popup-player-detail.html",
+      cssClass: "popup-player-detail",
+      scope: $scope
+    });
+    $timeout(function(){
+      $ionicScrollDelegate.resize();
+    });
+    var u = new User({id:player.id});
+    u.$match({league_id:1, team_id: $scope.team.id, prev: $scope.isPrevActive()? 1 : 0}, function(res){
+      $scope.player_popup_state = 'loaded';
+      $scope.match = res;
+      console.log($scope.match);
+    });
+  };
 })
 
 .controller('TeamMarketCtrl', function($rootScope, $scope, $timeout, $stateParams, $filter, $cordovaSocialSharing, $ionicPopup, $ionicAnalytics, Team) {
@@ -686,11 +740,14 @@ angular.module('dareyoo.controllers', [])
   };
 
   $scope.get_status = function(user) {
-    if($filter("filter")($scope.team.players, function(player) { return player.id == user.id; }).length > 0) {
+    var is_player = $filter("filter")($scope.team.players, function(player) { return player.id == user.id; });
+    var is_pending = $filter("filter")($scope.team.players_pending, function(player) { return player.id == user.id; });
+    var is_pending_captain = $filter("filter")($scope.team.players_waiting_captain, function(player) { return player.id == user.id; });
+    if(is_player && is_player.length > 0) {
       return 'signed';
-    } else if($filter("filter")($scope.team.players_pending, function(player) { return player.id == user.id; }).length > 0) {
+    } else if(is_pending && is_pending.length > 0) {
       return 'pending';
-    } else if($filter("filter")($scope.team.players_waiting_captain, function(player) { return player.id == user.id; }).length > 0) {
+    } else if(is_pending_captain && is_pending_captain.length > 0) {
       return 'pending_captain';
     } else {
       return 'available';

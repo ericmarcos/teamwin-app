@@ -77,13 +77,13 @@ angular.module('dareyoo.services', [])
     IOS_ID: '1023751394',
     ANDROID_ID: 'com.dareyoo.teamwin',
     APP_VERSION: '1.0.0',
-    extra_action: function(url, action, method, isArray) {
+    extra_action: function(url, action, method, isArray, req, resp) {
       return {
         method: method || 'POST',
         url: url + action + '/',
         isArray: isArray || false,
-        transformRequest: function (data) { return null; },
-        transformResponse: function (data) { return null; }
+        transformRequest: req || function (data) { return null; },
+        transformResponse: resp || function (data) { return null; }
       }
     },
   };
@@ -93,7 +93,9 @@ angular.module('dareyoo.services', [])
   var url = conf.BASE_URL + 'users/:userId/';
   var User = $resource(url, {userId: '@id'}, {
     me: {method:'GET', isArray:false, url: conf.BASE_URL + 'users/me/'},
-    update: {method:'POST', isArray:false, url: conf.BASE_URL + 'users/me/'}
+    update: {method:'POST', isArray:false, url: conf.BASE_URL + 'users/me/'},
+    add_friend: conf.extra_action(url, 'add_friend'),
+    match: conf.extra_action(url, 'match', 'GET', false, null, function(data){return JSON.parse(data);})
    });
   User.prototype.get_name = function() {
     return this.first_name || this.username;

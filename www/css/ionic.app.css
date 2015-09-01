@@ -3637,6 +3637,51 @@ team-avatar {
   .item-total .item-content h2 span {
     float: right; }
 
+.popup-player-detail .popup {
+  background-color: #2e2f31 !important; }
+  .popup-player-detail .popup .popup-head {
+    display: none !important; }
+  .popup-player-detail .popup .popup-body {
+    height: 100%;
+    overflow: visible; }
+    .popup-player-detail .popup .popup-body .close-btn {
+      background-color: #FE3B3B !important;
+      border-radius: 100px !important;
+      margin: 0px auto !important;
+      display: block !important;
+      font-size: 14px !important;
+      border: none !important;
+      color: #fff !important;
+      -webkit-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: -25px;
+      right: -25px; }
+    .popup-player-detail .popup .popup-body h1 {
+      font-size: 20px;
+      text-align: center; }
+    .popup-player-detail .popup .popup-body h4 {
+      font-size: 20px;
+      text-align: center; }
+    .popup-player-detail .popup .popup-body .player-summary {
+      height: 100%;
+      position: relative; }
+      .popup-player-detail .popup .popup-body .player-summary .player-pic {
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        display: block;
+        margin: 0px auto; }
+
+.pool-list-mini {
+  height: 300px !important;
+  max-height: 70% !important; }
+  .pool-list-mini .pool .left {
+    padding-left: 0px !important; }
+  .pool-list-mini .pool .right {
+    padding-right: 0px !important; }
+
 /********* MARKET *********/
 .market {
   padding: 4px; }
@@ -3769,258 +3814,6 @@ team-avatar {
 .fail {
   opacity: 0.4; }
 
-/*
-.play-screen {
-    //background: url('../img/play-bg.jpg');
-    //background-size: cover;
-    overflow: auto;
-    height: 100%;
-    .slider {
-        height: 100%;
-        .summary {
-            background-color: rgba(34,35,37,0.8);
-            font-size: 19px;
-            h2 {
-                font-size: 18px;
-                width: 100%;
-                text-align: center;
-                margin-top: 12px;
-            }
-            .extra-points-btn {
-                @include base-btn();
-                width: 90%;
-            }
-            .pool-list {
-                width: 100%;
-                height: 70%;
-                .pool {
-                    margin: 4px;
-                    background-color: #35353a;
-                    height: 40px;
-                    .left {
-                        width: 40%;
-                        float: left;
-                        padding-left: 10%;
-                        img {
-                            float: left;
-                            margin-top: 2px;
-                            width: 36px;
-                            height: 36px;
-                        }
-                        .team-name {
-                            float: left;
-                            padding-top: 9px;
-                            padding-left: 6px;
-                        }
-                    }
-                    .middle {
-                        width: 20%;
-                        height: 100%;
-                        float: left;
-                        text-align: center;
-                        font-weight: bold;
-                        background-color: #3f3f45;
-                        font-size: 24px;
-                        padding-top: 9px;
-
-                    
-                    }
-                    .right {
-                        width: 40%;
-                        float: left;
-                        padding-right: 10%;
-                        img {
-                            width: 36px;
-                            height: 36px;
-                            margin-top: 2px;
-                            float: right;
-                        }
-                        .team-name {
-                            float:right;
-                            padding-top: 9px;
-                            padding-right: 6px;
-                        }
-                    }
-                }
-            }
-            .share {
-                height: 20%;
-            }
-        }
-        .pool-slide {
-            height: 100%;
-            .top {
-                height: 30%;
-                padding-top: 28px;
-                h1 {
-                    text-align: center;
-                    margin-top: 0px !important;
-                    font-weight: bold;
-                    font-family: 'AsapBold';
-                }
-                h2 {
-                    text-align: center;
-                    height: 50px;
-                    margin-bottom: 40px;
-                }
-            }
-            .middle {
-                overflow:auto;
-                height:46%;
-                .team {
-                    width: 40%;
-                    float: left;
-                    text-align: center;
-                    img {
-                        width: 90%;
-                    }
-                    h3 {
-                        margin: 0px auto;
-                        font-size: 36px;
-                        color: white;
-                        font-weight: bold;
-                        font-family: 'AsapBold';
-                    }
-                    &:first-child img {
-                        -moz-transform: rotate(-9deg);
-                        -webkit-transform: rotate(-9deg);
-                        transform:rotate(-9deg);
-                    }
-                    &:last-child img {
-                        -moz-transform: rotate(9deg);
-                        -webkit-transform: rotate(9deg);
-                        transform:rotate(9deg);
-                    }
-                }
-                .vs {
-                    width: 20%;
-                    float: left;
-                    h3 {
-                        text-align: center;
-                        padding-top: 30px;
-                        font-size: 36px;
-                        color: white;
-                        font-style: italic;
-                        font-weight: bold;
-                        font-family: 'AsapBold';
-                    }
-                }
-            }
-            .result1.ng-enter {
-                -webkit-animation: bounceInLeft 1s linear;
-                -moz-animation: bounceInLeft 1s linear;
-                animation: bounceInLeft 1s linear;
-            }
-            .resultX.ng-enter {
-                -webkit-animation: bounceIn 1s linear;
-                -moz-animation: bounceIn 1s linear;
-                animation: bounceIn 1s linear;
-            }
-            .result2.ng-enter {
-                -webkit-animation: bounceInRight 1s linear;
-                -moz-animation: bounceInRight 1s linear;
-                animation: bounceInRight 1s linear;
-            }
-            .bottom.ng-leave {
-                -webkit-animation: fadeOut 1s linear;
-                -moz-animation: fadeOut 1s linear;
-                animation: fadeOut 1s linear;
-            }
-            .bottom {
-                width:100%;
-                height: 33%;
-                position: absolute;
-                bottom: 0px;
-                .row {
-                    height: 100%;
-                    @include vertical-align(40%);
-                    .col {
-                        position: relative;
-                        height: 100%;
-                        padding: 2px 5px;
-                        .result {
-                            position: relative;
-                            margin: 0px auto;
-                            width: 30%;
-                            height: 100%;
-                            background-color: $positive;
-                            border-radius: 50%;
-                            .number {
-                                @include vertical-align;
-                                position: absolute !important;
-                                width: 100%;
-                                text-align: center;
-                                font-size: 42px;
-                                font-weight: bold;
-                                font-family: 'AsapBold';
-                            }
-                        }
-                        .play-btn {
-                            width: 100%;
-                            height: 100%;
-                            .play-btn-bg {
-                                width: 100%;
-                                height: 100%;
-                                background: url("../img/play-btn.png") no-repeat center center;
-                                background-size: contain;
-                                -webkit-animation:spin 4s linear infinite;
-                                -moz-animation:spin 4s linear infinite;
-                                animation:spin 4s linear infinite;
-                            }
-                            .play-btn-shadow {
-                                width: 90%;
-                                height: 95%;
-                                border-radius: 50%;
-                                background-color: rgba(0,0,0,0);
-                                position: absolute;
-                                -webkit-box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.6);
-                                -moz-box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.6);
-                                box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.6);
-                            }
-                            .play-btn-bg-animating {
-                                -webkit-animation:spin 2s linear infinite;
-                                -moz-animation:spin 2s linear infinite;
-                                animation:spin 2s linear infinite;
-                            }
-                            .play-btn-active {
-                                position: absolute;
-                                top: 0px;
-                                width: 90%;
-                                height: 100%;
-                                background-color: $positive;
-                                border-radius: 50%;
-                            }
-                            .play-btn-active.ng-enter {
-                                -webkit-animation: zoomIn 1s linear;
-                                -moz-animation: zoomIn 1s linear;
-                                animation: zoomIn 1s linear;
-                            }
-                            .play-btn-active.ng-leave {
-                                -webkit-animation: zoomOut 1s linear;
-                                -moz-animation: zoomOut 1s linear;
-                                animation: zoomOut 1s linear;
-                            }
-                            .play-btn-number {
-                                @include vertical-align;
-                                position: absolute !important;
-                                width: 90%;
-                                text-align: center;
-                                font-size: 42px;
-                                color: #5f6481;
-                                font-weight: bold;
-                                font-family: 'AsapBold';
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-*/
 .play-screen {
   overflow: auto;
   height: 100%; }
@@ -4113,51 +3906,52 @@ team-avatar {
       width: 90%; }
     .play-screen .summary .pool-list-tall {
       height: calc(93% - 10px) !important; }
-    .play-screen .summary .pool-list {
-      margin-top: 10px;
-      width: 100%;
-      height: 73%; }
-      .play-screen .summary .pool-list .pool {
-        margin: 4px;
-        background-color: #35353a;
-        height: 40px; }
-        .play-screen .summary .pool-list .pool .left {
-          width: 40%;
-          float: left;
-          padding-left: 10%; }
-          .play-screen .summary .pool-list .pool .left img {
-            float: left;
-            margin-top: 2px;
-            width: 36px;
-            height: 36px; }
-          .play-screen .summary .pool-list .pool .left .team-name {
-            float: left;
-            padding-top: 9px;
-            padding-left: 6px; }
-        .play-screen .summary .pool-list .pool .middle {
-          width: 20%;
-          height: 100%;
-          float: left;
-          text-align: center;
-          font-weight: bold;
-          background-color: #3f3f45;
-          font-size: 24px;
-          padding-top: 9px; }
-        .play-screen .summary .pool-list .pool .right {
-          width: 40%;
-          float: left;
-          padding-right: 10%; }
-          .play-screen .summary .pool-list .pool .right img {
-            width: 36px;
-            height: 36px;
-            margin-top: 2px;
-            float: right; }
-          .play-screen .summary .pool-list .pool .right .team-name {
-            float: right;
-            padding-top: 9px;
-            padding-right: 6px; }
     .play-screen .summary .share {
       height: 20%; }
+
+.pool-list {
+  margin-top: 10px;
+  width: 100%;
+  height: 73%; }
+  .pool-list .pool {
+    margin: 4px;
+    background-color: #35353a;
+    height: 40px; }
+    .pool-list .pool .left {
+      width: 40%;
+      float: left;
+      padding-left: 10%; }
+      .pool-list .pool .left img {
+        float: left;
+        margin-top: 2px;
+        width: 36px;
+        height: 36px; }
+      .pool-list .pool .left .team-name {
+        float: left;
+        padding-top: 9px;
+        padding-left: 6px; }
+    .pool-list .pool .middle {
+      width: 20%;
+      height: 100%;
+      float: left;
+      text-align: center;
+      font-weight: bold;
+      background-color: #3f3f45;
+      font-size: 24px;
+      padding-top: 9px; }
+    .pool-list .pool .right {
+      width: 40%;
+      float: left;
+      padding-right: 10%; }
+      .pool-list .pool .right img {
+        width: 36px;
+        height: 36px;
+        margin-top: 2px;
+        float: right; }
+      .pool-list .pool .right .team-name {
+        float: right;
+        padding-top: 9px;
+        padding-right: 6px; }
 
 .option-text {
   position: absolute;

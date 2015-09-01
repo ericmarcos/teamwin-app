@@ -311,6 +311,32 @@ angular.module('dareyoo', [
           }
         }
       })
+    .state('tab.league-team-detail', {
+        url: '/league-team/:teamId',
+        views: {
+          'tab-league': {
+            templateUrl: 'templates/team-detail.html',
+            controller: 'TeamDetailCtrl'
+          }
+        }
+      })
+
+    .state('tab.league-team-detail.current', {
+      url: '/current',
+      views: {
+        'team-detail': {
+          templateUrl: 'templates/team-detail-current.html'
+        }
+      }
+    })
+    .state('tab.league-team-detail.prev', {
+      url: '/prev',
+      views: {
+        'team-detail': {
+          templateUrl: 'templates/team-detail-prev.html'
+        }
+      }
+    })
 
   .state('tab.teams', {
       url: '/teams',

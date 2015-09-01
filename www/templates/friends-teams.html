@@ -18,7 +18,7 @@
   <h2 ng-if="query.results.$resolved && query.results.length" class="waiting-title">Equipos encontrados con "{{query.team_name_prev}}"</h2>
 
   <ion-list ng-if="query.results.$resolved">
-    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="team in query.results" type="item-text-wrap" ui-sref="tab.team-detail.current({teamId: team.id})">
+    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="team in query.results" type="item-text-wrap" ui-sref="tab.team-detail({teamId: team.id})">
       <team-avatar class="team-item-avatar" team="team"></team-avatar>
       <h2>{{team.name}}</h2>
       <p><img ng-src="{{team.captain.pic}}"><span class="captain">Cap. <span class="username">{{get_name(team.captain)}}</span></span></p>
@@ -27,7 +27,7 @@
   </ion-list>
 
   <ion-list ng-if="!query.results.$resolved">
-    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="team in friend_teams" type="item-text-wrap" ui-sref="tab.team-detail.current({teamId: team.id})">
+    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="team in friend_teams" type="item-text-wrap" ui-sref="tab.team-detail({teamId: team.id})">
       <team-avatar class="team-item-avatar" team="team"></team-avatar>
       <h2>{{team.name}}</h2>
       <p><img ng-src="{{team.captain.pic}}"><span class="captain">Cap. <span class="username">{{get_name(team.captain)}}</span></span></p>

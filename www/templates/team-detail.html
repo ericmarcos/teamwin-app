@@ -1,5 +1,7 @@
 <ion-view view-title="{{team.name}}">
-  
+  <ion-nav-title>
+   {{team.name}}
+  </ion-nav-title>
   <ion-content>
     <ion-refresher
       pulling-text=""
@@ -26,10 +28,10 @@
       </div>
     </div>
     <div class="tabs teams-tabs">
-      <a ng-if="prev_leaderboard.length" class="tab-item" ng-class="{'active':isPrevActive()}" ui-sref="tab.team-detail.prev({teamId:team.id})">
+      <a ng-if="prev_leaderboard.length" class="tab-item" ng-class="{'active':isPrevActive()}" ui-sref=".prev({teamId:team.id})">
         Jornada anterior
       </a>
-      <a class="tab-item" ng-class="{'active':isCurrentActive()}" ui-sref="tab.team-detail.current({teamId:team.id})">
+      <a class="tab-item" ng-class="{'active':isCurrentActive()}" ui-sref=".current({teamId:team.id})">
         Jornada actual
       </a>
     </div>

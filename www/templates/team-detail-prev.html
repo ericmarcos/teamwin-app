@@ -5,7 +5,7 @@
   <ion-item class="item item-total" type="item-text-wrap">
     <div class="item-content"><h2>TOTAL <span>{{prev_total_points}}</span></h2></div>
   </ion-item>
-  <ion-item class="item-remove-animate item-avatar item-icon-right team-detail-item item item-complex item-right-editable" ng-repeat="player in prev_leaderboard" type="item-text-wrap">
+  <ion-item class="item-remove-animate item-avatar item-icon-right team-detail-item item item-complex item-right-editable" ng-repeat="player in prev_leaderboard" type="item-text-wrap" ng-click='showPlayerSummary(player)'>
     <div class="item-content">
       <img ng-src="{{player.pic}}" class="team-player-pic">
       <div class="team-player-name"><h2>{{get_name(player)}}</h2></div>

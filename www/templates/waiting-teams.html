@@ -1,6 +1,6 @@
 <ion-list>
   <h2 class="waiting-title" ng-if="!waiting_teams.length">No tienes solicitudes pendientes.</h2>
-  <ion-item class="item-remove-animate item-avatar item-avatar-waiting item-icon-right" ng-repeat="team in waiting_teams" type="item-text-wrap" ui-sref="tab.team-detail.current({teamId: team.id})">
+  <ion-item class="item-remove-animate item-avatar item-avatar-waiting item-icon-right" ng-repeat="team in waiting_teams" type="item-text-wrap" ui-sref="tab.team-detail({teamId: team.id})">
     <team-avatar class="team-item-avatar" team="team"></team-avatar>
     <h2>{{team.name}}</h2>
     <p class="pending" ng-if="team.state=='state_waiting_player'"><!--<img ng-src="{{team.captain.pic}}">-->El capitán <span class="username">{{get_name(team.captain)}}</span> quiere ficharte</p>
