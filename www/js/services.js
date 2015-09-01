@@ -123,16 +123,17 @@ angular.module('dareyoo.services', [])
   return User;
 }) 
 
-.factory('Team', function($cachedResource, $http, blob, conf) {
+.factory('Team', function($resource, $http, blob, conf) {
   var url = conf.BASE_URL + 'teams/:teamId/';
   
-  var Team = $cachedResource('team', url, {teamId: '@id'}, {
+  var Team = $resource(url, {teamId: '@id'}, {
     request_enroll: conf.extra_action(url, 'request_enroll'),
     leave: conf.extra_action(url, 'leave'),
     sign: conf.extra_action(url, 'sign'),
     fire: conf.extra_action(url, 'fire'),
     friends: {method:'GET', isArray:true, params:{friends:true}},
-    pending: {method:'GET', isArray:true, params:{pending:true}}
+    pending: {method:'GET', isArray:true, params:{pending:true}},
+    search: {method:'GET', isArray:true, url: conf.BASE_URL + 'teams/search/'}
    });
 
   Team.prototype.upload_avatar = function(image) {

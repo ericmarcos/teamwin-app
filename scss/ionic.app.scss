@@ -182,6 +182,18 @@ team-avatar {
 .base-btn {
     @include base-btn();
 }
+.search-btn {
+    @include base-btn(#222, 0px);
+    line-height: 20px !important;
+    max-height: 38px !important;
+    min-height: 38px !important;
+    i.icon {
+        font-size: 15px;
+    }
+}
+.search-input {
+    padding: 5px !important;
+}
 .fb-btn {
     @include base-btn(#3f60a4, 10px);
     width: 70%;
@@ -715,7 +727,9 @@ $upload-width: 114px;
 }
 .waiting-title {
     font-size: 16px;
-    padding: 8px 8px;
+    padding: 0px 8px;
+    margin-top: 4px !important;
+    text-align: center;
 }
 .item-avatar-waiting {
     height: 148px;

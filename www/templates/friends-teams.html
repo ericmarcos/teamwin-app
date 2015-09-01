@@ -1,23 +1,37 @@
-<h2 ng-if="friend_teams.length == 0" class="waiting-title">No hay ningún equipo disponible en estos momentos. ¡Crea el tuyo y conviértete en el capitán!</h2>
-<h2 ng-if="friend_teams.length != 0" class="waiting-title">Estos son los equipos de tus amigos ¡Únete a ellos!</h2>
-<!--<ion-list>
-  <ion-item class="item-remove-animate item-avatar item-icon-right" collection-repeat="team in friend_teams" type="item-text-wrap">
-    <img ng-src="{{team.pic}}">
-    <h2>{{team.name}}</h2>
-    <p>Capitán {{get_name(team.captain)}}</p>
-    <i class="icon ion-chevron-right icon-accessory"></i>
+<div class="item-input-inset">
+  <label class="item-input-wrapper">
+    <i class="icon ion-ios-search placeholder-icon"></i>
+    <input type="search" ng-model="query.team_name" class="search-input" placeholder="Buscar equipos...">
+  </label>
+  <button ng-if="query.team_name" class="button search-btn" ng-click="search()">
+    <i class="icon ion-chevron-right"></i>
+  </button>
+</div>
+<div ng-show="query.loading">
+  Loading
+</div>
 
-    <ion-option-button class="button-assertive" ng-click="remove(team)">
-      Salir
-    </ion-option-button>
-  </ion-item>
-</ion-list>-->
+<div ng-show="!query.loading">
+  <h2 ng-if="friend_teams.length == 0 && !query.results.$resolved" class="waiting-title">No hay ningún equipo disponible en estos momentos. ¡Crea el tuyo y conviértete en el capitán!</h2>
+  <h2 ng-if="friend_teams.length != 0 && !query.results.$resolved" class="waiting-title">Estos son los equipos de tus amigos.<br>¡Únete a ellos!</h2>
+  <h2 ng-if="query.results.$resolved && !query.results.length" class="waiting-title">No se han encontrado equipos con "{{query.team_name_prev}}"</h2>
+  <h2 ng-if="query.results.$resolved && query.results.length" class="waiting-title">Equipos encontrados con "{{query.team_name_prev}}"</h2>
 
-<ion-list>
-  <ion-item class="item-remove-animate item-avatar item-icon-right" collection-repeat="team in friend_teams" type="item-text-wrap" ui-sref="tab.team-detail.current({teamId: team.id})">
-    <team-avatar class="team-item-avatar" team="team"></team-avatar>
-    <h2>{{team.name}}</h2>
-    <p><img ng-src="{{team.captain.pic}}"><span class="captain">Cap. <span class="username">{{get_name(team.captain)}}</span></span></p>
-    <i class="icon ion-chevron-right icon-accessory"></i>
-  </ion-item>
-</ion-list>
+  <ion-list ng-if="query.results.$resolved">
+    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="team in query.results" type="item-text-wrap" ui-sref="tab.team-detail.current({teamId: team.id})">
+      <team-avatar class="team-item-avatar" team="team"></team-avatar>
+      <h2>{{team.name}}</h2>
+      <p><img ng-src="{{team.captain.pic}}"><span class="captain">Cap. <span class="username">{{get_name(team.captain)}}</span></span></p>
+      <i class="icon ion-chevron-right icon-accessory"></i>
+    </ion-item>
+  </ion-list>
+
+  <ion-list ng-if="!query.results.$resolved">
+    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="team in friend_teams" type="item-text-wrap" ui-sref="tab.team-detail.current({teamId: team.id})">
+      <team-avatar class="team-item-avatar" team="team"></team-avatar>
+      <h2>{{team.name}}</h2>
+      <p><img ng-src="{{team.captain.pic}}"><span class="captain">Cap. <span class="username">{{get_name(team.captain)}}</span></span></p>
+      <i class="icon ion-chevron-right icon-accessory"></i>
+    </ion-item>
+  </ion-list>
+</div>

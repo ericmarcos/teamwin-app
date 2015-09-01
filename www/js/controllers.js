@@ -401,14 +401,24 @@ angular.module('dareyoo.controllers', [])
   $scope.init_league();
 })
 
-.controller('TeamsCtrl', function($scope, $rootScope, $state, $timeout, $filter, $ionicPopup, $ionicAnalytics) {
+.controller('TeamsCtrl', function($scope, $rootScope, $state, $timeout, $filter, $ionicPopup, $ionicAnalytics, Team) {
   $ionicAnalytics.track('teams');
   //if(typeof analytics !== undefined) analytics.trackView("teams");
-
+  //$scope.search_teams = [];
   $scope.isWaitingActive = function() { return $state.includes("tab.teams.waiting") };
   $scope.isCurrentActive = function() { return $state.includes("tab.teams.current") };
   $scope.isFriendsActive = function() { return $state.includes("tab.teams.friends") };
-
+  $rootScope.query = {team_name: "", team_name_prev: "", results:{}, loading: false};
+  $scope.search = function() {
+    Team.search({name:$rootScope.query.team_name}).$promise.then(function(res){
+      $rootScope.query.loading = false;
+      $rootScope.query.results = res;
+    }, function() {
+      $rootScope.query.loading = false;
+    });
+    $rootScope.query.team_name_prev = $rootScope.query.team_name;
+    $rootScope.query.loading = true;
+  };
   $scope.leave = function(team, confirm, event) {
     if(confirm) {
       var leavePopup = $ionicPopup.confirm({
@@ -525,6 +535,8 @@ angular.module('dareyoo.controllers', [])
       teams = $rootScope.waiting_teams.filter(function(elem){ return elem.id == $stateParams.teamId; });
     if(!teams.length)
       teams = $rootScope.friend_teams.filter(function(elem){ return elem.id == $stateParams.teamId; });
+    if(!teams.length)
+      teams = $rootScope.query.results.filter(function(elem){ return elem.id == $stateParams.teamId; });
     if(teams.length) {
       $scope.team = teams[0];
       $scope.leaderboard = $scope.team.leagues[0].leaderboard;

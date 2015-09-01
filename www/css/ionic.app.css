@@ -2868,6 +2868,26 @@ team-avatar {
   -moz-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2); }
 
+.search-btn {
+  background-color: #222 !important;
+  border-radius: 100px !important;
+  margin: 0px auto !important;
+  display: block !important;
+  font-size: 18px !important;
+  border: none !important;
+  color: #fff !important;
+  -webkit-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+  line-height: 20px !important;
+  max-height: 38px !important;
+  min-height: 38px !important; }
+  .search-btn i.icon {
+    font-size: 15px; }
+
+.search-input {
+  padding: 5px !important; }
+
 .fb-btn {
   background-color: #3f60a4 !important;
   border-radius: 100px !important;
@@ -3425,7 +3445,9 @@ team-avatar {
 
 .waiting-title {
   font-size: 16px;
-  padding: 8px 8px; }
+  padding: 0px 8px;
+  margin-top: 4px !important;
+  text-align: center; }
 
 .item-avatar-waiting {
   height: 148px; }
