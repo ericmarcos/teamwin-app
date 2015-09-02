@@ -538,7 +538,7 @@ angular.module('dareyoo.controllers', [])
       teams = $rootScope.waiting_teams.filter(function(elem){ return elem.id == $stateParams.teamId; });
     if(!teams.length)
       teams = $rootScope.friend_teams.filter(function(elem){ return elem.id == $stateParams.teamId; });
-    if(!teams.length && $rootScope.query && $rootScope.query.results)
+    if(!teams.length && $rootScope.query && $rootScope.query.results && $rootScope.query.results.filter)
       teams = $rootScope.query.results.filter(function(elem){ return elem.id == $stateParams.teamId; });
     if(teams.length) {
       $scope.team = teams[0];
@@ -663,7 +663,14 @@ angular.module('dareyoo.controllers', [])
       $scope.waiting_teams.push($scope.team);
     });
   };
+  $scope.isCaptain = function() {
+    if($scope.team && $scope.team.captain)
+      return $scope.me.id == $scope.team.captain.id;
+    return false;
+  };
   $scope.isFriend = function(user) {
+    if(user.id == $scope.me.id)
+      return true;
     var is_friend = $filter("filter")($scope.me.friends, function(player) { return player.id == user.id; });
     if(is_friend && is_friend.length > 0)
       return true;
@@ -705,6 +712,22 @@ angular.module('dareyoo.controllers', [])
       $scope.player_popup_state = 'loaded';
       $scope.match = res;
     });
+  };
+  $scope.call_players = {};
+  $scope.callPlayersPopup = function() {
+    $scope.call_players_popup_state = 'initial';
+    $scope.call_players.popup = $ionicPopup.show({
+      templateUrl: "templates/popup-call-players.html",
+      cssClass: "popup-call-players",
+      scope: $scope
+    });
+  };
+  $scope.callPlayers = function() {
+    $scope.team.$call_players({message:$scope.call_players.message});
+    $scope.call_players_popup_state = 'sent';
+  };
+  $scope.cancelCallPlayers = function() {
+    $scope.call_players.popup.close();
   };
 })
 

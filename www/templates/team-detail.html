@@ -16,6 +16,9 @@
         <button class="sign-players-btn button" ui-sref="tab.market({teamId:team.id})" ng-if="userBelongsTeam()">
         FICHAR JUGADORES
         </button>
+        <button class="call-players-btn button" ng-click="callPlayersPopup()" ng-if="isCaptain()">
+        CONVOCAR EQUIPO
+        </button>
         <button class="sign-players-btn button" ng-click="enroll()" ng-if="!userBelongsTeam() && !isPendingMe() && !isPendingCaptain()">
         UNIRME
         </button>

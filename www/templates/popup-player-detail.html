@@ -35,6 +35,6 @@
     <h4>{{ get_name(player) }} se ha añadido a tu mercado de fichajes.</h4>
     <h5>Ahora podrás fichar a {{ get_name(player) }} en la pantalla "Fichar jugadores" dentro de "Mis equipos".</h5>
 </div>
-<button class="close-btn button" ng-click="close_player_popup()">
+<button class="close-btn button" ng-click="close_player_popup()" stop-event="click">
     <i class="icon ion-close-round"></i>
 </button>

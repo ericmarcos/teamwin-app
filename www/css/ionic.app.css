@@ -3543,7 +3543,23 @@ team-avatar {
       -webkit-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
       -moz-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
       box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
-      margin: 10px 6px !important; }
+      margin: 10px 6px 4px !important;
+      width: 100% !important;
+      min-height: 41px !important; }
+    .team-detail .right .call-players-btn {
+      background-color: #7e84a3 !important;
+      border-radius: 100px !important;
+      margin: 2px auto !important;
+      display: block !important;
+      font-size: 14px !important;
+      border: none !important;
+      color: #fff !important;
+      -webkit-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      margin: 10px 6px 4px !important;
+      width: 100% !important;
+      min-height: 41px !important; }
     .team-detail .right .sign-players-accept-btn {
       background-color: #FE3B3B !important;
       border-radius: 100px !important;
@@ -3642,7 +3658,6 @@ team-avatar {
   .popup-player-detail .popup .popup-head {
     display: none !important; }
   .popup-player-detail .popup .popup-body {
-    height: 100%;
     overflow: visible; }
     .popup-player-detail .popup .popup-body .close-btn {
       background-color: #FE3B3B !important;
@@ -3681,6 +3696,47 @@ team-avatar {
     padding-left: 0px !important; }
   .pool-list-mini .pool .right {
     padding-right: 0px !important; }
+
+.popup-call-players .popup {
+  background-color: #2e2f31 !important; }
+  .popup-call-players .popup .popup-head {
+    display: none !important; }
+  .popup-call-players .popup .popup-body {
+    text-align: center; }
+    .popup-call-players .popup .popup-body .cancel-btn {
+      background-color: #bababa !important;
+      border-radius: 100px !important;
+      margin: 10px auto !important;
+      display: block !important;
+      font-size: 18px !important;
+      border: none !important;
+      color: #000 !important;
+      -webkit-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      display: inline-block !important;
+      min-height: 0px !important;
+      width: 60%; }
+    .popup-call-players .popup .popup-body .action-btn {
+      background-color: #FE3B3B !important;
+      border-radius: 100px !important;
+      margin: 10px auto !important;
+      display: block !important;
+      font-size: 18px !important;
+      border: none !important;
+      color: #fff !important;
+      -webkit-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 5px 10px -1px rgba(0, 0, 0, 0.2);
+      display: inline-block !important;
+      min-height: 0px !important;
+      width: 90%; }
+    .popup-call-players .popup .popup-body textarea {
+      margin: 12px 0px;
+      text-align: left;
+      background-color: #555;
+      color: #fff;
+      padding: 12px; }
 
 /********* MARKET *********/
 .market {

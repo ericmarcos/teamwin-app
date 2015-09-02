@@ -1,6 +1,6 @@
 <ion-list>
   <!--<div class="ranking-item" ng-repeat="team in league.leaderboard" ui-sref="tab.team-detail({teamId:team.id})">-->
-  <div class="ranking-item" ng-repeat="team in league.leaderboard" ui-sref="tab.league-team-detail({teamId:team.id})">
+  <div class="ranking-item" ng-repeat="team in league.leaderboard" ui-sref="tab.league-team-detail.current({teamId:team.id})">
     <div class="position"><h1 ng-if="$index < 10">{{$index+1}} -</h1></div>
     <div class="pic"><team-avatar team="team"></team-avatar></div>
     <div class="name"><h2>{{team.name}}</h2></div>

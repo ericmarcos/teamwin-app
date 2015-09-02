@@ -133,6 +133,7 @@ angular.module('dareyoo.services', [])
     leave: conf.extra_action(url, 'leave'),
     sign: conf.extra_action(url, 'sign'),
     fire: conf.extra_action(url, 'fire'),
+    call_players: conf.extra_action(url, 'call_players'),
     friends: {method:'GET', isArray:true, params:{friends:true}},
     pending: {method:'GET', isArray:true, params:{pending:true}},
     search: {method:'GET', isArray:true, url: conf.BASE_URL + 'teams/search/'}

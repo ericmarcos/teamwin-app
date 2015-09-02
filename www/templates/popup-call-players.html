@@ -1,0 +1,16 @@
+<div ng-show="call_players_popup_state == 'initial'">
+    <h4>Envía un mensaje a<br>todo el equipo:</h4>
+    <textarea cols="100" rows="4" placeholder="Recordad que nos jugamos 50€, ¿habéis hecho ya vuestros pronósticos?" ng-model="call_players.message"></textarea>
+    <button class="action-btn button" ng-click="callPlayers()">
+    ENVIAR
+    </button>
+    <button class="cancel-btn button" ng-click="cancelCallPlayers()">
+    CANCELAR
+    </button>
+</div>
+<div ng-show="call_players_popup_state == 'sent'">
+    <h4>!Tu mensaje se ha enviado correctamente!</h4>
+    <button class="action-btn button" ng-click="cancelCallPlayers()">
+    OK
+    </button>
+</div>

@@ -25,7 +25,7 @@
     <span class="played-icon">
       {{player.points}}<span class="pool-shared"></span><span class="pool-hit"></span>
     </span>
-    <!--<span class="progress-pools" style="width:{{completedPools(player)}}%" ng-class="{'pending-pools': hasPendingPools(player)}"></span>-->
+    <span class="progress-pools" style="width:{{completedPools(player)}}%" ng-class="{'pending-pools': hasPendingPools(player)}"></span>
     <ion-option-button ng-if="canFire(team, player)" class="button-assertive" ng-click="fire(player, true)">
       Expulsar
     </ion-option-button>

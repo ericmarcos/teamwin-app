@@ -801,7 +801,15 @@ $upload-width: 114px;
         }
         .sign-players-btn {
             @include base-btn($positive, 10px, #fff, 14px);
-            margin: 10px 6px !important;
+            margin: 10px 6px 4px !important;
+            width: 100% !important;
+            min-height: 41px !important;
+        }
+        .call-players-btn {
+            @include base-btn(#7e84a3, 2px, #fff, 14px);
+            margin: 10px 6px 4px !important;
+            width: 100% !important;
+            min-height: 41px !important;
         }
         .sign-players-accept-btn {
             @include base-btn($positive, 10px, #fff, 14px);
@@ -876,7 +884,6 @@ $upload-width: 114px;
             display: none !important;
         }
         .popup-body {
-            height: 100%;
             overflow: visible;
             .close-btn {
                 @include base-btn($positive, 0px, #fff, 14px);
@@ -914,6 +921,37 @@ $upload-width: 114px;
     .pool {
         .left { padding-left: 0px !important; }
         .right { padding-right: 0px !important; }
+    }
+}
+
+.popup-call-players {
+    .popup {
+        background-color: #2e2f31 !important;
+        .popup-head {
+            display: none !important;
+        }
+        .popup-body {
+            text-align: center;
+            .cancel-btn {
+                @include base-btn(#bababa, 10px, #000);
+                display: inline-block !important;
+                min-height: 0px !important;
+                width: 60%;
+            }
+            .action-btn {
+                @include base-btn($positive, 10px);
+                display: inline-block !important;
+                min-height: 0px !important;
+                width: 90%;
+            }
+            textarea {
+                margin: 12px 0px;
+                text-align: left;
+                background-color: #555;
+                color: #fff;
+                padding:12px;
+            }
+        }
     }
 }
 
